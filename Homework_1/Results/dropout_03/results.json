@@ -1,0 +1,19 @@
+{
+    "seed": 42,
+    "epochs": 30,
+    "fast_cpu": true,
+    "train_size": 10000,
+    "validation_size": 2000,
+    "test_size": 10000,
+    "batch_size": 256,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "scheduler": "StepLR step_size 15 gamma 0.1",
+    "dropout": 0.3,
+    "batch_norm": false,
+    "parameters": 611210,
+    "test_accuracy": 0.6447,
+    "test_loss": 1.016685412120819,
+    "best_validation_accuracy": 0.645,
+    "hardware": "CPU"
+}

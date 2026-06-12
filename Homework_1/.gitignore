@@ -1,8 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
-Data/
-Results/
-Results_P*/
+Data/*.tar.gz
 Lectures/
 .ipynb_checkpoints/

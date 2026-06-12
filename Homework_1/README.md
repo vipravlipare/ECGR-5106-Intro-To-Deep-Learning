@@ -30,4 +30,4 @@ For faster laptop training, `fast_cpu=True` was used. This trains on a fixed 10,
 
 ## Notes
 
-The `Data/`, `Results/`, `Results_P1/`, `Results_P2/`, `Results_P3/`, and `Lectures/` folders are ignored by git because they contain downloaded data, saved model files, generated plots, or class materials. They can be recreated by running the notebooks.
+The large CIFAR-10 archive file and `Lectures/` folder are ignored by git. The results folders are included so the saved plots, logs, and model outputs can be viewed from the repository.

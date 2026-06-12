@@ -1,0 +1,17 @@
+{
+    "seed": 42,
+    "epochs": 30,
+    "train_size": 10000,
+    "val_size": 2000,
+    "batch_size": 256,
+    "optimizer": "AdamW",
+    "lr": 0.001,
+    "scheduler": "ReduceLROnPlateau",
+    "dropout": 0.0,
+    "weight_decay": 0.0001,
+    "params": 612042,
+    "test_acc": 0.7523,
+    "best_val_acc": 0.753,
+    "time": 724.75461769104,
+    "hardware": "CPU"
+}

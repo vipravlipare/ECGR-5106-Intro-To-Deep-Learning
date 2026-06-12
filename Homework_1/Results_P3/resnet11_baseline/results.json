@@ -1,0 +1,14 @@
+{
+    "seed": 42,
+    "epochs": 50,
+    "train_size": 10000,
+    "val_size": 2000,
+    "batch_size": 256,
+    "model": "r11",
+    "dropout": 0.0,
+    "params": 604250,
+    "test_acc": 0.6459,
+    "best_val_acc": 0.646,
+    "time": 3732.1824634075165,
+    "hardware": "CPU"
+}
