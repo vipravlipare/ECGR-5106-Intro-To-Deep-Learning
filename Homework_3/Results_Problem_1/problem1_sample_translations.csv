@@ -1,0 +1,6 @@
+input_english,target_french,predicted_french,exact_match,char_accuracy,char_bleu4,word_bleu4
+they feed the pigeons in the square,ils nourrissent les pigeons sur la place,ils vont à la porte a une tournoi prochaine,FAIL,0.13953488372093023,0.23552491598932357,0.028517539529041507
+she practices yoga every morning,elle pratique le yoga tous les matins,elle a perdu matin est très compétitif,FAIL,0.21052631578947367,0.29908304971049515,0.033031643180138064
+i enjoy walking in the snow,j'aime marcher dans la neige,j'ai fermement le couramment,FAIL,0.17857142857142858,0.15450079547146167,0.0
+she loves to wear modern jackets,elle adore porter des vestes modernes,elle a perdu ses clés de collection des recherches un cousilles comme de la m,FAIL,0.12987012987012986,0.17011511412978897,0.015718877363021206
+the city bus arrives precisely at five o'clock,le bus de la ville arrive précisément à cinq heures,le chien attrape la biologique,FAIL,0.058823529411764705,0.11661142421074958,0.023505403213046533

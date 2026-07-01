@@ -1,0 +1,112 @@
+input_english,target_french,predicted_french,exact_match,char_accuracy,char_bleu4,word_bleu4
+they feed the pigeons in the square,ils nourrissent les pigeons sur la place,ils vont à la porte a une tournoi prochaine,FAIL,0.13953488372093023,0.23552491598932357,0.028517539529041507
+she practices yoga every morning,elle pratique le yoga tous les matins,elle a perdu matin est très compétitif,FAIL,0.21052631578947367,0.29908304971049515,0.033031643180138064
+i enjoy walking in the snow,j'aime marcher dans la neige,j'ai fermement le couramment,FAIL,0.17857142857142858,0.15450079547146167,0.0
+she loves to wear modern jackets,elle adore porter des vestes modernes,elle a perdu ses clés de collection des recherches un cousilles comme de la m,FAIL,0.12987012987012986,0.17011511412978897,0.015718877363021206
+the city bus arrives precisely at five o'clock,le bus de la ville arrive précisément à cinq heures,le chien attrape la biologique,FAIL,0.058823529411764705,0.11661142421074958,0.023505403213046533
+we visited the historical ruins of the pyramid,nous avons visité les ruines historiques de la pyramide,nous avons visité le monument les courses,FAIL,0.38181818181818183,0.4338408586026464,0.13201355840223275
+they speak french with a perfect parisian accent,ils parlent français avec un parfait accent parisien,ils vont fait un veu café est concert,FAIL,0.1346153846153846,0.22966531991757302,0.03303164318013808
+we crossed the wide river using a wooden raft,nous avons traversé la large rivière en utilisant un radeau en bois,nous avons visité le monument les courses,FAIL,0.16417910447761194,0.21312015453767433,0.03419615942951201
+the milk is cold,le lait est froid,le chien attrape la balle,FAIL,0.2,0.14757581190431862,0.05372849659117709
+we enjoy playing video games,nous aimons jouer à des jeux vidéo,nous avons visité les marisons pour les courses,FAIL,0.14893617021276595,0.23266378628593437,0.02777619034011792
+the birds chirp in the morning,les oiseaux gazouillent le matin,le cherche son porte frais de la bacances,FAIL,0.07317073170731707,0.0477166145566076,0.02777619034011792
+the project takes a lot of time,le projet prend beaucoup de temps,le pain est très frais de la balle,FAIL,0.11764705882352941,0.1896550847075289,0.03303164318013808
+i want to drink a glass of milk,je veux boire un verre de lait,je veux une tasse de chaussures,FAIL,0.25806451612903225,0.4133732829767919,0.0808764862779457
+they play basketball after school,ils jouent au basket après l'école,ils vont à la porte a une belle poignée en bois,FAIL,0.1702127659574468,0.11618322588318081,0.018850319022747353
+she cooked a traditional sunday roast for everyone,elle a cuisiné un rôti du dimanche traditionnel pour tout le monde,elle a perdu matin est très compétitif,FAIL,0.13636363636363635,0.15933797590571344,0.03419615942951201
+they visit museums often,ils visitent souvent des musées,ils vont fait un veu café est concert,FAIL,0.1891891891891892,0.18458298255891684,0.02777619034011792
+they feed the hungry pigeons near the fountain,ils nourrissent les pigeons affamés près de la fontaine,ils parlent souvent de poignée en bois,FAIL,0.10909090909090909,0.1837730577281523,0.029519129053903102
+she goes to the gym regularly,elle va régulièrement à la salle de sport,elle a perdu matin est très compétitif,FAIL,0.14634146341463414,0.14397919854498137,0.028634401465295497
+she writes poetry in her free time,elle écrit de la poésie pendant son temps libre,elle cherche son chat mot de poignée en brique,FAIL,0.14893617021276595,0.32061656400769784,0.03155984539112946
+he vacuums his entire house every friday afternoon,il passe l'aspirateur dans toute sa maison tous les vendredis après-midi,il a terminé son projet sur le voler,FAIL,0.041666666666666664,0.08042948690756382,0.019090277826420414
+the hot chocolate was served with mini marshmallows,le chocolat chaud était servi avec des mini guimauves,le match de conservation de la bibliothèque course de se tennis les jardins v,FAIL,0.1038961038961039,0.11866486287022897,0.01428363257865929
+she purchased a rare vintage painting at the auction,elle a acheté un tableau vintage rare aux enchères,elle a perdu matin est très compétitif,FAIL,0.14,0.17764850420976985,0.05249325939883762
+he plays guitar in a local band,il joue de la guitare dans un groupe local,il joue de la plage,FAIL,0.3333333333333333,0.22932112805455138,0.3004843884984905
+the old wooden bridge is safe to cross,le vieux pont en bois est sûr à traverser,le match de se classique en bois,FAIL,0.0975609756097561,0.24280908847088203,0.05809334108283256
+the pizza tastes good,la pizza a bon goût,le cherche son porte fond rapidement,FAIL,0.2222222222222222,0.04292590487583545,0.0
+she wears a diamond necklace,elle porte un collier de diamants,elle cherche son chat mot de poignée en brique,FAIL,0.13043478260869565,0.23558626275271222,0.028517539529041507
+she practices her dance routine in front of the mirror,elle pratique sa routine de danse devant le miroir,elle cherche son chat mot de poignée en brique,FAIL,0.18,0.2546723347130305,0.028517539529041507
+he plays bass in a jazz band,il joue de la basse dans un groupe de jazz,il joue de la plage,FAIL,0.35714285714285715,0.22624229388858633,0.24601580968354606
+he teaches biology to teenagers,il enseigne la biologie aux adolescents,il aime restarent des collines,FAIL,0.10256410256410256,0.06803977310251429,0.0439891724758422
+we are definitely going to the live concert tomorrow,nous allons certainement au concert en direct demain,nous avons visité le monument les courses,FAIL,0.15384615384615385,0.25837783125437175,0.028634401465295497
+the concert was spectacular,le concert était spectaculaire,l'hôtel est très confortable,FAIL,0.1,0.1420170825454499,0.0
+the local dentist advised me to brush twice daily,le dentiste local m'a conseillé de me brosser les dents deux fois par jour,la plage de la guide,FAIL,0.06756756756756757,0.02120272901737279,0.008881260752338875
+they went to the cinema last night,ils sont allés au cinéma hier soir,ils vont faire de la balle,FAIL,0.29411764705882354,0.1983107332305739,0.03455747170954952
+we crossed the crowded street near the station,nous avons traversé la rue bondée près de la gare,nous avons visité le monument les courses,FAIL,0.2653061224489796,0.2961431156199066,0.04550524645870584
+they built a campfire last night,ils ont fait un feu de camp hier soir,ils vont faire de la balle,FAIL,0.10810810810810811,0.291332338729162,0.02944656445786981
+she drives a fast car,elle conduit une voiture rapide,elle cherche son chat mot de poignée en brique,FAIL,0.1956521739130435,0.1720536738095911,0.023980296761827107
+they feed the white pigeons in the public square,ils nourrissent les pigeons blancs sur la place publique,ils vont à la porte a une tournoi prochaine,FAIL,0.10714285714285714,0.18256012283608328,0.028517539529041507
+we need to buy some eggs,nous devons acheter des œufs,nous avons visité les marisons pour les courses,FAIL,0.10638297872340426,0.21076973831819648,0.02777619034011792
+he paints landscapes,il peint des paysages,il aime lire des du collège,FAIL,0.14814814814814814,0.20389696163541748,0.048549177170732344
+i enjoy walking in the forest,j'aime marcher dans la forêt,j'aime perdu ma bague en cuir merveillement magnifiquement bois,FAIL,0.12698412698412698,0.14802701706134175,0.023980296761827107
+they spent their vacation exploring small islands,ils ont passé leurs vacances à explorer de petites îles,ils parlent souvent des films voiture,FAIL,0.09090909090909091,0.1361078086232306,0.020960166113993737
+he speaks six international languages completely fluently,il parle couramment six langues internationales,il a perdu match de concert,FAIL,0.0851063829787234,0.09238998665786077,0.040824829046386304
+we walked around the lake during the sunset,nous avons marché autour du lac pendant le coucher du soleil,nous avons visité les marisons pour les courses,FAIL,0.23333333333333334,0.35325844459967104,0.04037102236950707
+we walk in the countryside,nous marchons à la campagne,nous avons visité le monument les courses,FAIL,0.17073170731707318,0.18504962190568539,0.033031643180138064
+they bought a house with a huge backyard,ils ont acheté une maison avec un immense jardin,ils jouent au tennis le week-end,FAIL,0.10416666666666667,0.13566207817794332,0.024761510494160165
+the computer is fast,l'ordinateur est rapide,la fenêtre le bac en course de se reflète le soleil broyabe,FAIL,0.03389830508474576,0.017172960830630933,0.0
+she speaks english with confidence,elle parle anglais avec assurance,elle porte un chiot de la plage,FAIL,0.3939393939393939,0.2085195353185222,0.033031643180138064
+they traveled to italy last summer,ils ont voyagé en italie l'été dernier,ils vont faire de la balle,FAIL,0.15789473684210525,0.20486454410175736,0.03455747170954952
+close the window,fermez la fenêtre,veux pour les coustiques de la bus,FAIL,0.08823529411764706,0.08568635726825899,0.033031643180138064
+the weather is perfect today,le temps est parfait aujourd'hui,le match de la français,FAIL,0.15625,0.048007287601139946,0.05372849659117709
+they constructed a large stone wall around the property,ils ont construit un grand mur de pierre autour de la propriété,ils vont faire de la balle,FAIL,0.09523809523809523,0.11346896189050545,0.0351487760467425
+we are planning a trip to rome,nous planifions un voyage à rome,nous avons visité le monument les courses,FAIL,0.17073170731707318,0.20497047621310296,0.033031643180138064
+they often talk about history,ils parlent souvent d'histoire,ils vivent dans une grande ville,FAIL,0.1875,0.2692529872279712,0.040824829046386304
+she won a prestigious regional science award,elle a remporté un prestigieux prix scientifique régional,elle cherche son chat mot de poignée en brique,FAIL,0.12280701754385964,0.17062887915945282,0.023980296761827107
+he writes stories for children,il écrit des histoires pour enfants,il a perdu match de conduire,FAIL,0.11428571428571428,0.07668811896768064,0.040824829046386304
+he cooks dinner for his family,il cuisine le dîner pour sa famille,il a perdu match de concert,FAIL,0.17142857142857143,0.05909155019448894,0.03455747170954952
+he loves to read classic science fiction novels,il aime lire des romans classiques de science-fiction,il aime restaurant les ciles ses longues,FAIL,0.18867924528301888,0.26178801710042704,0.0605543865104477
+the birds are building a nest,les oiseaux construisent un nid,le match de se classique en bois,FAIL,0.1875,0.06424237712032502,0.0
+he completely forgot his secure login credentials,il a complètement oublié ses identifiants de connexion sécurisés,il a perdu ses clés de collection des recherches au concert,FAIL,0.109375,0.31364007467199523,0.04740604259878138
+we travel by train,nous voyageons en train,nous avons visité le monument les courses,FAIL,0.17073170731707318,0.1961790432890607,0.033031643180138064
+the cat climbs the tall tree,le chat grimpe sur le grand arbre,le train part de la balle,FAIL,0.12121212121212122,0.06262931250932907,0.03455747170954952
+we celebrated their golden wedding anniversary yesterday,nous avons célébré leur anniversaire de mariage d'or hier,nous avons visité le monument les courses,FAIL,0.19298245614035087,0.2783487596153538,0.05249325939883762
+he likes to take pictures,il aime prendre des photos,il aime lire des du collège,FAIL,0.37037037037037035,0.4842734640584506,0.09554427922043669
+the keys are missing from my coat pocket,les clés manquent dans la poche de mon manteau,le pain est très frais de la bac en course de se reflète le jardin,FAIL,0.10606060606060606,0.15396503757846464,0.015718877363021206
+she dances gracefully,elle danse avec grâce,elle a perdu matin est très compétitif,FAIL,0.13157894736842105,0.1378656354920227,0.033031643180138064
+we eat breakfast together,nous prendons le petit déjeuner ensemble,nous avons visité le monument les courses,FAIL,0.1951219512195122,0.2637417099103384,0.039281465090051315
+the new software update fixed several critical bugs,la nouvelle mise à jour logicielle a corrigé plusieurs bugs critiques,le match de conservation de la bibliothèque course de se tennis les jardins v,FAIL,0.06493506493506493,0.13377008704910137,0.01428363257865929
+they are building a new school,ils construisent une nouvelle école,ils vont à la porte a une tournoi prochaine,FAIL,0.13953488372093023,0.2128908043511379,0.028517539529041507
+they live in a beautiful apartment facing the river,ils vivent dans un bel appartement face à la rivière,ils vont faire de la balle,FAIL,0.09615384615384616,0.16465807451199196,0.024925978674400287
+she is looking for her cat,elle cherche son chat,elle cherche son chat mot de poignée en brique,FAIL,0.45652173913043476,0.43761880888611643,0.2984745896009823
+my phone is broken,mon téléphone est cassé,vous avez une très confortable,FAIL,0.13333333333333333,0.059055756167575545,0.0
+i saw an interesting shooting star last night,j'ai vu une étoile filante intéressante la nuit dernière,je veux une table,FAIL,0.10714285714285714,0.03268251376137686,0.023018609596144116
+i look forward to meeting you,j'ai hâte de vous rencontrer,j'ai un sont des confortables,FAIL,0.20689655172413793,0.2578557675410513,0.05372849659117709
+we happily celebrated their beautiful wedding ceremony,nous avons joyeusement célébré leur magnifique cérémonie de mariage,nous avons visité le monument les courses,FAIL,0.1791044776119403,0.2652634005872229,0.05249325939883762
+she studies hard for exams,elle étudie dur pour les examens,elle cherche son chimique de se tennis avant des comme de la musique,FAIL,0.07352941176470588,0.1120411163116028,0.01553712569276035
+we are ready to start the game,nous sommes prêts à commencer le jeu,nous avons visité le monument les courses,FAIL,0.24390243902439024,0.24717397818616285,0.039281465090051315
+we always have a big dinner on christmas eve,nous dînons toujours copieusement le soir du réveillon de noël,nous avons visité le monument les courses,FAIL,0.12903225806451613,0.2836693332825328,0.02558948059670209
+the computer screen is covered in fingerprints,l'écran de l'ordinateur est couvert d'empreintes digitales,le match de conservation de la bibliothèque confortablement les visiter des c,FAIL,0.06493506493506493,0.16520326197558022,0.017033186037639283
+we are waiting for the train,nous attendons le train,nous avons visité le monument les courses,FAIL,0.1951219512195122,0.25069449381435255,0.039281465090051315
+the final exam is extremely difficult to pass,l'examen final est extrêmement difficile à réussir,le match de se classique en bois,FAIL,0.1,0.052540931743963785,0.0
+he bought a new bicycle,il a acheté une nouvelle bicyclette,il a perdu match de concert,FAIL,0.14285714285714285,0.15304830062316938,0.08633400213704504
+he cleans his kitchen counters every evening,il nettoie ses comptoirs de cuisine chaque soir,il conduit une matin,FAIL,0.1276595744680851,0.03648105626588978,0.029556479778261396
+the local library is closed on bank holidays,la bibliothèque locale est fermée les jours fériés,le match de conservation de la bibliothèque course de se tennis les jardins v,FAIL,0.06493506493506493,0.34816190021522264,0.03342866121562732
+i see a plane in the sky,je vois un avion dans le ciel,je vois un chiot de la musique en page dans l'océan,FAIL,0.3137254901960784,0.3538995029906512,0.10025157431478134
+he writes articles for a magazine,il écrit des articles pour un magazine,il a perdu match de concert,FAIL,0.10526315789473684,0.07410318453828792,0.03455747170954952
+he answers the phone calls with a polite voice,il répond aux appels téléphoniques d'une voix polie,il a perdu match de concert,FAIL,0.09803921568627451,0.03267124544569781,0.02925226826055808
+she teaches chemistry at a prestigious college,elle enseigne la chimie dans un collège prestigieux,elle cherche son chat mot de poignée en brique,FAIL,0.21568627450980393,0.22700811953716574,0.023980296761827107
+we celebrated her promotion with a nice dinner,nous avons célébré sa promotion avec un bon dîner,nous avons visité le monument les courses,FAIL,0.24489795918367346,0.2844340135317739,0.05249325939883762
+i lost my way in the forest,je me suis perdu dans la forêt,j'ai fermement le couramment,FAIL,0.03333333333333333,0.0347177106177541,0.0
+the cat is sleeping,le chat dort,le match de conservation de la bibliothèque,FAIL,0.06976744186046512,0.04695698720921546,0.033031643180138064
+he finished his test early,il a fini son test en avance,il a perdu match de conduire,FAIL,0.21428571428571427,0.17948731297841766,0.07308015504567583
+she paints her small bedroom light blue,elle peint sa petite chambre en bleu clair,elle cherche son chimique de la musique en cuir de la pluie,FAIL,0.13559322033898305,0.2225085214569109,0.020255986027125642
+they practice soccer every evening,ils s'entraînent au football tous les soirs,ils sont attentivement les matins,FAIL,0.16279069767441862,0.30583655501205065,0.04282963710525157
+please step away from the closing doors,s'il vous plaît  éloignez-vous des portes qui se ferment,vous avez une très compétitif,FAIL,0.07017543859649122,0.08314940673892922,0.01976560930094397
+they speak french at home,ils parlent français à la maison,ils vont à la porte a une tournoi prochaine,FAIL,0.11627906976744186,0.23304390977478465,0.056122223243057295
+the flowers bloom in spring,les fleurs fleurissent au printemps,le soleil brille à la bibliothèque en bois un change de la pluie,FAIL,0.0625,0.01903035925309474,0.0
+i need a reliable pair of winter boots,j'ai besoin d'une paire de bottes d'hiver fiable,j'ai reçu une colline en bois,FAIL,0.14583333333333334,0.16668322563136373,0.02925226826055808
+she works part-time at the library,elle travaille à temps partiel à la bibliothèque,elle a perdu matin est très compétitif,FAIL,0.125,0.15101635847237802,0.028634401465295497
+he teaches mathematics to children,il enseigne les mathématiques aux enfants,il a perdu match de conduire,FAIL,0.12195121951219512,0.10610789822217016,0.040824829046386304
+she makes delicious cakes,elle fait de délicieux gâteaux,elle cherche son chimique de se tennis avant des comme de la musique colline,FAIL,0.10526315789473684,0.12447528538919715,0.0169861974906263
+the dog barks loudly,le chien aboie bruyamment,l'hôtel est très confortable,FAIL,0.03571428571428571,0.030934588294313718,0.0
+they swim in the pool,ils nagent dans la piscine,ils vont à la porte a une tournoi prochaine,FAIL,0.13953488372093023,0.203525235843549,0.028517539529041507
+we watched the spectacular sunrise over the ocean,nous avons regardé le lever de soleil spectaculaire sur l'océan,nous avons visité le monument les courses,FAIL,0.19047619047619047,0.2487222382292601,0.05035983350735684
+the children love chocolate,les enfants adorent le chocolat,le match de la français,FAIL,0.0967741935483871,0.06281364680578866,0.05372849659117709
+i need some help,j'ai besoin d'aide,je dois classique russe porte un chiot de la musique en page de poignée en bl,FAIL,0.012987012987012988,0.012527752695774788,0.0
+i am reading an interesting novel,je lis un roman intéressant,je lis un roman chaque jour,FAIL,0.6296296296296297,0.592388980641638,0.5081327481546147
+we celebrated his graduation,nous avons célébré sa remise de diplôme,nous avons visité le monument les courses,FAIL,0.2682926829268293,0.35453555316451546,0.06985342056580097
+the nurse advised him to sleep,l'infirmière lui a couseeillé de dormir,le chien attrape la balle,FAIL,0.10256410256410256,0.04519666486239303,0.0
+i want a hot cup of coffee,je veux une tasse de café chaud,je veux une tasse de chaud,FAIL,0.7096774193548387,0.8159349601033503,0.6731821382417487
+he works hard every day,il travaille dur tous les jours,il a perdu match de conduire,FAIL,0.12903225806451613,0.05957177789812515,0.040824829046386304
+we swim during summer,nous nageons pendant l'été,nous avons visité le monument les courses,FAIL,0.14634146341463414,0.22638633395011223,0.033031643180138064
