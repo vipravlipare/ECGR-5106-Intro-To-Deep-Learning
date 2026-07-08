@@ -1,0 +1,6 @@
+source_english,target_french,predicted_french,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+they feed the pigeons in the square,ils nourrissent les pigeons sur la place,le le le le le,FAIL,0.0,0.37037037037037035,0.01727298518111718,0.0
+she practices yoga every morning,elle pratique le yoga tous les matins,le le le le le,FAIL,0.0,0.39215686274509803,0.08822937714331147,0.036015288308423515
+i enjoy walking in the snow,j'aime marcher dans la neige,le le le le le,FAIL,0.0,0.38095238095238093,0.01924696757095675,0.0
+she loves to wear modern jackets,elle adore porter des vestes modernes,le le le le le,FAIL,0.0,0.39215686274509803,0.02094032238184183,0.0
+the city bus arrives precisely at five o'clock,le bus de la ville arrive précisément à cinq heures,le le le le le,FAIL,0.058823529411764705,0.3384615384615385,0.013064748635533205,0.01976560930094397

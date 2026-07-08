@@ -1,0 +1,4 @@
+model,direction,exact_accuracy,word_bleu4,char_bleu4,best_validation_loss,training_time_sec,total_params
+Reversed Baseline GRU,French to English,0.0,0.0622687625306696,0.171085748483103,1.3773117065429688,202.58863353729248,332689
+Reversed Attention GRU,French to English,0.0,0.0725552594233387,0.1940097620852512,1.474844455718994,527.796172618866,666929
+Homework 4 Best Reversed Transformer,French to English,0.0,0.14709667935826087,0.3618826885886903,4.196595907211304,34.29434871673584,1249915

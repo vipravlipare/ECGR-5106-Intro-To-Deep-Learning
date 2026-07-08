@@ -1,0 +1,112 @@
+source_french,target_english,predicted_english,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+ils nourrissent les pigeons sur la place,they feed the pigeons in the square,they hike in the forest,FAIL,0.2,0.5517241379310345,0.3262379198747054,0.08428828344718171
+elle pratique le yoga tous les matins,she practices yoga every morning,she studies mathematics at the park,FAIL,0.11428571428571428,0.417910447761194,0.19454290935168922,0.040824829046386304
+j'aime marcher dans la neige,i enjoy walking in the snow,i enjoy walking in the rain,FAIL,0.8518518518518519,0.8888888888888888,0.8518217258010183,0.7598356856515925
+elle adore porter des vestes modernes,she loves to wear modern jackets,she loves to wear modern leather jackets,FAIL,0.625,0.8888888888888888,0.771419972478277,0.6434588841607617
+le bus de la ville arrive précisément à cinq heures,the city bus arrives precisely at five o'clock,the bus arrives at five o'clock,FAIL,0.08695652173913043,0.8051948051948052,0.5825889631917844,0.19053627645285992
+nous avons visité les ruines historiques de la pyramide,we visited the historical ruins of the pyramid,we visited the ancient amphitheater during our holiday,FAIL,0.2962962962962963,0.48,0.3846498842119624,0.1374708101760565
+ils parlent français avec un parfait accent parisien,they speak french with a perfect parisian accent,they speak with an accent,FAIL,0.22916666666666666,0.684931506849315,0.3704967454789483,0.07415543676501504
+nous avons traversé la large rivière en utilisant un radeau en bois,we crossed the wide river using a wooden raft,we crossed the narrow corridors of the old castle,FAIL,0.3469387755102041,0.44680851063829785,0.3727095828663316,0.11868405219520975
+le lait est froid,the milk is cold,the summer is very cold,FAIL,0.17391304347826086,0.6666666666666666,0.3617640392425988,0.07071067811865477
+nous aimons jouer à des jeux vidéo,we enjoy playing video games,we are planning a dream trip to rome next year,FAIL,0.08695652173913043,0.4594594594594595,0.15942530661337126,0.021105340631872645
+les oiseaux gazouillent le matin,the birds chirp in the morning,the birds sing in the trees,FAIL,0.3333333333333333,0.7017543859649122,0.5739378806486586,0.12209471671615688
+le projet prend beaucoup de temps,the project takes a lot of time,the project requires a lot of effort,FAIL,0.4166666666666667,0.746268656716418,0.6236362995619311,0.20556680845025987
+je veux boire un verre de lait,i want to drink a glass of milk,i want a cold glass of iced coffee,FAIL,0.23529411764705882,0.6153846153846154,0.48743766950836465,0.08783602619713961
+ils jouent au basket après l'école,they play basketball after school,they regularly play tennis on the weekends,FAIL,0.16666666666666666,0.37333333333333335,0.2647610205371829,0.039281465090051315
+elle a cuisiné un rôti du dimanche traditionnel pour tout le monde,she cooked a traditional sunday roast for everyone,she practices the cello for three hours every day,FAIL,0.1,0.3838383838383838,0.3147205547535781,0.028517539529041507
+ils visitent souvent des musées,they visit museums often,they often talk about modern fashion,FAIL,0.16666666666666666,0.3333333333333333,0.27358384246243783,0.048549177170732344
+ils nourrissent les pigeons affamés près de la fontaine,they feed the hungry pigeons near the fountain,they practice long-distance running every single morning,FAIL,0.17857142857142858,0.43137254901960786,0.15569596351963463,0.028634401465295497
+elle va régulièrement à la salle de sport,she goes to the gym regularly,she translates text from english to classical music,FAIL,0.09803921568627451,0.325,0.1694950132578541,0.03303164318013808
+elle écrit de la poésie pendant son temps libre,she writes poetry in her free time,she won first place in the writing contest,FAIL,0.16666666666666666,0.2894736842105263,0.31438952742725257,0.03303164318013808
+il passe l'aspirateur dans toute sa maison tous les vendredis après-midi,he vacuums his entire house every friday afternoon,he answered the emergency phone call within seconds,FAIL,0.11764705882352941,0.37623762376237624,0.0655898096064002,0.02777619034011792
+le chocolat chaud était servi avec des mini guimauves,the hot chocolate was served with mini marshmallows,the train arrives on time,FAIL,0.09803921568627451,0.2894736842105263,0.06378554416823533,0.029486824119076216
+elle a acheté un tableau vintage rare aux enchères,she purchased a rare vintage painting at the auction,she bought a beautiful painting,FAIL,0.09615384615384616,0.4819277108433735,0.22508088312083974,0.03177235575108143
+il joue de la guitare dans un groupe local,he plays guitar in a local band,he plays bass guitar in a professional jazz band,FAIL,0.25,0.7341772151898734,0.5153898193117942,0.1561969968460128
+le vieux pont en bois est sûr à traverser,the old wooden bridge is safe to cross,the map is difficult to understand,FAIL,0.18421052631578946,0.4166666666666667,0.22189695160039422,0.03849815007763549
+la pizza a bon goût,the pizza tastes good,the rain falls gently,FAIL,0.19047619047619047,0.42857142857142855,0.1919507457447164,0.08034284189446518
+elle porte un collier de diamants,she wears a diamond necklace,she wears a beautiful silver bracelet on her wrist,FAIL,0.28,0.46153846153846156,0.27253368147817386,0.11868405219520975
+elle pratique sa routine de danse devant le miroir,she practices her dance routine in front of the mirror,she practices the cello for three hours every day,FAIL,0.3148148148148148,0.3883495145631068,0.4139832382993652,0.05022037190492093
+il joue de la basse dans un groupe de jazz,he plays bass in a jazz band,he plays bass guitar in a professional jazz band,FAIL,0.3125,0.7368421052631579,0.5344544811712315,0.1744391898986843
+il enseigne la biologie aux adolescents,he teaches biology to teenagers,he teaches chemistry to university students,FAIL,0.3488372093023256,0.5675675675675675,0.3658141331541051,0.09554427922043669
+nous allons certainement au concert en direct demain,we are definitely going to the live concert tomorrow,we are going to the concert tomorrow,FAIL,0.15384615384615385,0.8181818181818182,0.6214279958441551,0.18056582172643848
+le concert était spectaculaire,the concert was spectacular,the match was extremely close and exciting,FAIL,0.14285714285714285,0.4057971014492754,0.17903495611830317,0.039281465090051315
+le dentiste local m'a conseillé de me brosser les dents deux fois par jour,the local dentist advised me to brush twice daily,the dentist advised me to brush,FAIL,0.10204081632653061,0.775,0.5492661555413174,0.48235607976922595
+ils sont allés au cinéma hier soir,they went to the cinema last night,they listen to the professor with absolute attention,FAIL,0.17307692307692307,0.4418604651162791,0.2703709506756855,0.06500593260343691
+nous avons traversé la rue bondée près de la gare,we crossed the crowded street near the station,we crossed the high mountain pass on foot,FAIL,0.3695652173913043,0.5057471264367817,0.373908909885885,0.1374708101760565
+ils ont fait un feu de camp hier soir,they built a campfire last night,they built a safe campfire near the lake,FAIL,0.4,0.6666666666666666,0.588501779106902,0.1477219991186121
+elle conduit une voiture rapide,she drives a fast car,she drives a red motorcycle,FAIL,0.48148148148148145,0.625,0.48043387605989124,0.26591479484724945
+ils nourrissent les pigeons blancs sur la place publique,they feed the white pigeons in the public square,they practice long-distance running every single morning,FAIL,0.19642857142857142,0.36538461538461536,0.12909153557993808,0.024822529802838878
+nous devons acheter des œufs,we need to buy some eggs,we need to buy some organic vegetables,FAIL,0.5526315789473685,0.7419354838709677,0.5366012740912229,0.6147881529512643
+il peint des paysages,he paints landscapes,he writes scripts for,FAIL,0.2857142857142857,0.34146341463414637,0.1000625978397282,0.08034284189446518
+j'aime marcher dans la forêt,i enjoy walking in the forest,i enjoy walking in the rain,FAIL,0.7931034482758621,0.8571428571428571,0.7910041298817694,0.7598356856515925
+ils ont passé leurs vacances à explorer de petites îles,they spent their vacation exploring small islands,they regular meet up to discuss global politics,FAIL,0.14285714285714285,0.3125,0.15646923750972924,0.02777619034011792
+il parle couramment six langues internationales,he speaks six international languages completely fluently,he speaks four languages fluently,FAIL,0.21052631578947367,0.6666666666666666,0.3912026154098222,0.09057365499736145
+nous avons marché autour du lac pendant le coucher du soleil,we walked around the lake during the sunset,we crossed the high mountain pass on foot,FAIL,0.11627906976744186,0.38095238095238093,0.22752653428318087,0.03303164318013808
+nous marchons à la campagne,we walk in the countryside,we dance at the concert,FAIL,0.19230769230769232,0.5714285714285714,0.31343419499355735,0.06389431042462725
+ils ont acheté une maison avec un immense jardin,they bought a house with a huge backyard,they are planning to build a modern art gallery,FAIL,0.1276595744680851,0.41379310344827586,0.15625716750968024,0.028517539529041507
+l'ordinateur est rapide,the computer is fast,the hotel is very comfortable,FAIL,0.20689655172413793,0.5306122448979592,0.27720767003806895,0.06389431042462725
+elle parle anglais avec assurance,she speaks english with confidence,she translates text from english to french,FAIL,0.11904761904761904,0.5789473684210527,0.3150344324105199,0.039281465090051315
+ils ont voyagé en italie l'été dernier,they traveled to italy last summer,they built a safe campfire near the lake,FAIL,0.15,0.3783783783783784,0.16925466459550803,0.02777619034011792
+fermez la fenêtre,close the window,the window reflects the window,FAIL,0.0,0.5652173913043478,0.37256412123104216,0.11362193664674995
+le temps est parfait aujourd'hui,the weather is perfect today,the ocean reflects the blue sky,FAIL,0.1935483870967742,0.4067796610169492,0.1826249361348376,0.040824829046386304
+ils ont construit un grand mur de pierre autour de la propriété,they constructed a large stone wall around the property,they built a safe campfire near the lake,FAIL,0.12727272727272726,0.35789473684210527,0.20809191407843158,0.03226013518927287
+nous planifions un voyage à rome,we are planning a trip to rome,we are planning a dream trip to rome next year,FAIL,0.41304347826086957,0.7894736842105263,0.6222757644193574,0.37991784282579627
+ils parlent souvent d'histoire,they often talk about history,they often talk about fashion,FAIL,0.7931034482758621,0.8620689655172413,0.7858173638855422,0.668740304976422
+elle a remporté un prestigieux prix scientifique régional,she won a prestigious regional science award,she won a highly competitive chess tournament,FAIL,0.26666666666666666,0.47191011235955055,0.31069231717901097,0.16348126556655487
+il écrit des histoires pour enfants,he writes stories for children,he writes scripts for movies,FAIL,0.5666666666666667,0.7241379310344828,0.5647695774560096,0.12574334296829354
+il cuisine le dîner pour sa famille,he cooks dinner for his family,he finished his science project ahead of schedule,FAIL,0.12244897959183673,0.3291139240506329,0.13318543819033032,0.03303164318013808
+il aime lire des romans classiques de science-fiction,he loves to read classic science fiction novels,he likes to watch historical documentaries on television,FAIL,0.21428571428571427,0.44660194174757284,0.22224127828055645,0.03303164318013808
+les oiseaux construisent un nid,the birds are building a nest,the birds a beautiful smile,FAIL,0.4482758620689655,0.6071428571428571,0.45331307071630184,0.10294994188297393
+il a complètement oublié ses identifiants de connexion sécurisés,he completely forgot his secure login credentials,he lost his balance and fell off the bicycle,FAIL,0.08163265306122448,0.3870967741935484,0.22573610675675954,0.028517539529041507
+nous voyageons en train,we travel by train,we need to buy some bread,FAIL,0.12,0.46511627906976744,0.06667489966054597,0.040824829046386304
+le chat grimpe sur le grand arbre,the cat climbs the tall tree,the sleepy koala climbs the tall eucalyptus tree,FAIL,0.14583333333333334,0.6842105263157895,0.4703105136011805,0.1561969968460128
+nous avons célébré leur anniversaire de mariage d'or hier,we celebrated their golden wedding anniversary yesterday,we need to complete this layout task by midnight,FAIL,0.10714285714285714,0.3076923076923077,0.11657825400351413,0.023980296761827107
+il aime prendre des photos,he likes to take pictures,he likes to read science fiction,FAIL,0.4375,0.631578947368421,0.43599218613896507,0.20205155046766235
+les clés manquent dans la poche de mon manteau,the keys are missing from my coat pocket,the championship football match was incredibly intense,FAIL,0.14814814814814814,0.2765957446808511,0.09889477982036037,0.028634401465295497
+elle danse avec grâce,she dances gracefully,she wears an elegant pearl necklace,FAIL,0.14285714285714285,0.35714285714285715,0.12982679446701692,0.040824829046386304
+nous prendons le petit déjeuner ensemble,we eat breakfast together,we visited the national park together,FAIL,0.10810810810810811,0.5806451612903226,0.29585413467074745,0.048549177170732344
+la nouvelle mise à jour logicielle a corrigé plusieurs bugs critiques,the new software update fixed several critical bugs,the soup needs a little more salt and pepper,FAIL,0.17647058823529413,0.4,0.1493136399891533,0.023980296761827107
+ils construisent une nouvelle école,they are building a new school,they built a cozy treehouse for safety,FAIL,0.18421052631578946,0.4411764705882353,0.26709423196221654,0.039281465090051315
+ils vivent dans un bel appartement face à la rivière,they live in a beautiful apartment facing the river,they live in a large brick house,FAIL,0.3137254901960784,0.5783132530120482,0.3060755901351532,0.30895757752065417
+elle cherche son chat,she is looking for her cat,she is looking everywhere for her lost cat,FAIL,0.35714285714285715,0.7647058823529411,0.5639400951184521,0.18092176081223305
+mon téléphone est cassé,my phone is broken,i am reading a classic,FAIL,0.045454545454545456,0.25,0.015047149445189388,0.0
+j'ai vu une étoile filante intéressante la nuit dernière,i saw an interesting shooting star last night,i received an official invitation to the party,FAIL,0.10869565217391304,0.3956043956043956,0.1251252444312272,0.03303164318013808
+j'ai hâte de vous rencontrer,i look forward to meeting you,i look forward to collaborating with your team,FAIL,0.391304347826087,0.6933333333333334,0.5046524649008893,0.345720784641941
+nous avons joyeusement célébré leur magnifique cérémonie de mariage,we happily celebrated their beautiful wedding ceremony,we celebrated our anniversary,FAIL,0.07407407407407407,0.5060240963855421,0.21543182985775197,0.045131921809482646
+elle étudie dur pour les examens,she studies hard for exams,she works full-time at the general hospital,FAIL,0.09302325581395349,0.3188405797101449,0.10098277028252003,0.033031643180138064
+nous sommes prêts à commencer le jeu,we are ready to start the game,we are entirely ready to start the tournament,FAIL,0.26666666666666666,0.7733333333333333,0.5763712910701819,0.4111336169005197
+nous dînons toujours copieusement le soir du réveillon de noël,we always have a big dinner on christmas eve,we spent a week visiting the national park,FAIL,0.11363636363636363,0.37209302325581395,0.06712987799880213,0.02915032279375143
+l'écran de l'ordinateur est couvert d'empreintes digitales,the computer screen is covered in fingerprints,the business hotel is situated near the center,FAIL,0.21739130434782608,0.17391304347826086,0.22890192477017524,0.03303164318013808
+nous attendons le train,we are waiting for the train,we visited the famous,FAIL,0.17857142857142858,0.4489795918367347,0.20487271926537462,0.05795053470733952
+l'examen final est extrêmement difficile à réussir,the final exam is extremely difficult to pass,the business hotel is situated near the center,FAIL,0.10869565217391304,0.3516483516483517,0.16375150238341313,0.03303164318013808
+il a acheté une nouvelle bicyclette,he bought a new bicycle,he drives a black luxury sedan,FAIL,0.2,0.2641509433962264,0.07022952541634664,0.048549177170732344
+il nettoie ses comptoirs de cuisine chaque soir,he cleans his kitchen counters every evening,he cleans his office desk every single evening,FAIL,0.391304347826087,0.6444444444444445,0.5797761640793658,0.1561969968460128
+la bibliothèque locale est fermée les jours fériés,the local library is closed on bank holidays,the library is actively looking for the center,FAIL,0.17391304347826086,0.4666666666666667,0.3882748587959611,0.06500593260343691
+je vois un avion dans le ciel,i see a plane in the sky,i see a rainbow in the sky,FAIL,0.34615384615384615,0.84,0.6636859108766658,0.274941620352113
+il écrit des articles pour un magazine,he writes articles for a magazine,he writes analytical articles for a popular website,FAIL,0.21568627450980393,0.6666666666666666,0.4907107049871316,0.17286039232097053
+il répond aux appels téléphoniques d'une voix polie,he answers the phone calls with a polite voice,he answers all a letter to rest,FAIL,0.2826086956521739,0.5974025974025974,0.2946374423147577,0.05809334108283256
+elle enseigne la chimie dans un collège prestigieux,she teaches chemistry at a prestigious college,she teaches works in a high-tech chemical laboratory,FAIL,0.2692307692307692,0.40816326530612246,0.39010794437069535,0.06500593260343691
+nous avons célébré sa promotion avec un bon dîner,we celebrated her promotion with a nice dinner,we celebrated our anniversary,FAIL,0.34782608695652173,0.4533333333333333,0.3129354139658899,0.06250434473199146
+je me suis perdu dans la forêt,i lost my way in the forest,i will text you when i arrive home,FAIL,0.14705882352941177,0.4918032786885246,0.03546108623645985,0.02777619034011792
+le chat dort,the cat is sleeping,the cat meows loudly,FAIL,0.4,0.5641025641025641,0.3967088290836577,0.16990442448471224
+il a fini son test en avance,he finished his test early,he finished his science project ahead of schedule,FAIL,0.32653061224489793,0.5866666666666667,0.34762390671894916,0.1374708101760565
+elle peint sa petite chambre en bleu clair,she paints her small bedroom light blue,she paints her bedroom blue,FAIL,0.38461538461538464,0.8181818181818182,0.5999732333300403,0.20252884954471367
+ils s'entraînent au football tous les soirs,they practice soccer every evening,they practice long-distance running every single morning,FAIL,0.2857142857142857,0.6666666666666666,0.4002271472356191,0.07730551756939454
+"s'il vous plaît , éloignez-vous des portes qui se ferment",please step away from the closing doors,please close the gate,FAIL,0.20512820512820512,0.5,0.29245899979308654,0.045131921809482646
+ils parlent français à la maison,they speak french at home,they speak spanish fluently,FAIL,0.4444444444444444,0.5769230769230769,0.4472135954999579,0.13232169883599026
+les fleurs fleurissent au printemps,the flowers bloom in spring,the spring flowers are blooming,FAIL,0.12903225806451613,0.6896551724137931,0.6747040091688699,0.07071067811865477
+j'ai besoin d'une paire de bottes d'hiver fiable,i need a reliable pair of winter boots,i need a new pair of leather boots today,FAIL,0.275,0.717948717948718,0.5919343527941354,0.1561969968460128
+elle travaille à temps partiel à la bibliothèque,she works part-time at the library,she works full-time at the hospital,FAIL,0.6571428571428571,0.6956521739130435,0.623508304482618,0.12209471671615688
+il enseigne les mathématiques aux enfants,he teaches mathematics to children,he teaches chemistry to university students,FAIL,0.2558139534883721,0.5974025974025974,0.37563296735787305,0.09554427922043669
+elle fait de délicieux gâteaux,she makes delicious cakes,she paints her room white,FAIL,0.28,0.4,0.13858909661779084,0.05372849659117709
+le chien aboie bruyamment,the dog barks loudly,the dog is sleeping on the rug,FAIL,0.26666666666666666,0.52,0.26734653352752924,0.06985342056580097
+ils nagent dans la piscine,they swim in the pool,they listen to the radio,FAIL,0.20833333333333334,0.5777777777777777,0.36519346563474564,0.06389431042462725
+nous avons regardé le lever de soleil spectaculaire sur l'océan,we watched the spectacular sunrise over the ocean,we watched the storm clouds gather over the hills,FAIL,0.5510204081632653,0.5714285714285714,0.5389408106723579,0.14923729480049117
+les enfants adorent le chocolat,the children love chocolate,the monkey climbs the banana tree,FAIL,0.18181818181818182,0.3,0.12178021069411955,0.040824829046386304
+j'ai besoin d'aide,i need some help,i urgently need a new pair of running shoes,FAIL,0.06976744186046512,0.3389830508474576,0.14361580529268292,0.028517539529041507
+je lis un roman intéressant,i am reading an interesting novel,i am reading a classic novel,FAIL,0.42424242424242425,0.7213114754098361,0.5513161513793166,0.21711852081087685
+nous avons célébré sa remise de diplôme,we celebrated his graduation,we celebrated our anniversary,FAIL,0.5172413793103449,0.5964912280701754,0.5129653078853402,0.16990442448471224
+l'infirmière lui a couseeillé de dormir,the nurse advised him to sleep,the emergency room nurse told him to rest,FAIL,0.12195121951219512,0.5633802816901409,0.4009795351710138,0.06985342056580097
+je veux une tasse de café chaud,i want a hot cup of coffee,i want a large slice of chocolate cake,FAIL,0.2894736842105263,0.59375,0.34939124256882104,0.1477219991186121
+il travaille dur tous les jours,he works hard every day,he works full-time at the general hospital,FAIL,0.21428571428571427,0.49230769230769234,0.22705711562322145,0.06985342056580097
+nous nageons pendant l'été,we swim during summer,we are entirely ready to start the tournament,FAIL,0.06666666666666667,0.30303030303030304,0.03740492393720507,0.02777619034011792

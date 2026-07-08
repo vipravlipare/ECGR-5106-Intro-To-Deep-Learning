@@ -1,0 +1,2 @@
+model,base_transformer_config,memory_threshold,traditional_sequence_accuracy,validation_character_accuracy,validation_sequence_similarity,validation_bleu4_char_level,validation_bleu4_word_level,memory_used_fraction
+Homework 4 Improved Transformer + Similarity Boost,blocks1_heads2,0.55,0.0,0.2912798636997134,0.5793625206752064,0.4035235081372934,0.15062068744975432,0.9009009009009009

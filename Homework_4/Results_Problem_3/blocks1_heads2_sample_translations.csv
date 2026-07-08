@@ -1,0 +1,6 @@
+source_english,target_french,predicted_french,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+they feed the pigeons in the square,ils nourrissent les pigeons sur la place,ils nourrissent les oiseaux dans la ville,FAIL,0.5609756097560976,0.7407407407407407,0.6012010889539362,0.17567205239427922
+she practices yoga every morning,elle pratique le yoga tous les matins,elle joue du violon tous les jours,FAIL,0.16216216216216217,0.5915492957746479,0.3998688025959693,0.07730551756939454
+i enjoy walking in the snow,j'aime marcher dans la neige,j'aime marcher dans la forêt dense,FAIL,0.6764705882352942,0.8064516129032258,0.6816088136830766,0.5081327481546147
+she loves to wear modern jackets,elle adore porter des vestes modernes,elle adore porter des vestes en cuir modernes,FAIL,0.6444444444444445,0.9024390243902439,0.7978799393550989,0.5410822690539396
+the city bus arrives precisely at five o'clock,le bus de la ville arrive précisément à cinq heures,le bus arrive à cinq heures,FAIL,0.13725490196078433,0.6923076923076923,0.38469107079413095,0.13652520787861752

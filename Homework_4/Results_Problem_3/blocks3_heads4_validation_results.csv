@@ -1,0 +1,112 @@
+source_english,target_french,predicted_french,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+they feed the pigeons in the square,ils nourrissent les pigeons sur la place,nous nous le,FAIL,0.0,0.34615384615384615,0.0472916445806536,0.0
+she practices yoga every morning,elle pratique le yoga tous les matins,nous nous le,FAIL,0.02702702702702703,0.2857142857142857,0.0632698805599215,0.029950417327249696
+i enjoy walking in the snow,j'aime marcher dans la neige,nous nous le,FAIL,0.0,0.3,0.030394248109987625,0.0
+she loves to wear modern jackets,elle adore porter des vestes modernes,nous nous le,FAIL,0.02702702702702703,0.08163265306122448,0.008597192680112506,0.0
+the city bus arrives precisely at five o'clock,le bus de la ville arrive précisément à cinq heures,nous nous le,FAIL,0.0392156862745098,0.19047619047619047,0.005252351972432803,0.011018142789200103
+we visited the historical ruins of the pyramid,nous avons visité les ruines historiques de la pyramide,nous nous le,FAIL,0.09090909090909091,0.29850746268656714,0.013549283023764475,0.015377056977980369
+they speak french with a perfect parisian accent,ils parlent français avec un parfait accent parisien,nous nous le,FAIL,0.0,0.125,0.0024631369423835483,0.0
+we crossed the wide river using a wooden raft,nous avons traversé la large rivière en utilisant un radeau en bois,nous nous le,FAIL,0.07462686567164178,0.22784810126582278,0.0044632421637437894,0.005656903127920845
+the milk is cold,le lait est froid,nous nous le,FAIL,0.0,0.13793103448275862,0.03716508815024547,0.0814136751754278
+we enjoy playing video games,nous aimons jouer à des jeux vidéo,nous nous le,FAIL,0.14705882352941177,0.391304347826087,0.06831453808578243,0.029950417327249696
+the birds chirp in the morning,les oiseaux gazouillent le matin,nous nous le,FAIL,0.0,0.3181818181818182,0.02677824203912357,0.05833544737207805
+the project takes a lot of time,le projet prend beaucoup de temps,nous nous le,FAIL,0.030303030303030304,0.08888888888888889,0.011131099001038744,0.0417991745584234
+i want to drink a glass of milk,je veux boire un verre de lait,nous nous le,FAIL,0.0,0.19047619047619047,0.011366497578011097,0.0
+they play basketball after school,ils jouent au basket après l'école,nous nous le,FAIL,0.0,0.34782608695652173,0.02345200683338102,0.0
+she cooked a traditional sunday roast for everyone,elle a cuisiné un rôti du dimanche traditionnel pour tout le monde,nous nous le,FAIL,0.015151515151515152,0.23076923076923078,0.0015411108938044597,0.005656903127920845
+they visit museums often,ils visitent souvent des musées,nous nous le,FAIL,0.0,0.37209302325581395,0.016014969993380278,0.0
+they feed the hungry pigeons near the fountain,ils nourrissent les pigeons affamés près de la fontaine,nous nous le,FAIL,0.0,0.26865671641791045,0.013257730129313241,0.0
+she goes to the gym regularly,elle va régulièrement à la salle de sport,nous nous le,FAIL,0.024390243902439025,0.07547169811320754,0.005566330874913466,0.0
+she writes poetry in her free time,elle écrit de la poésie pendant son temps libre,nous nous le,FAIL,0.02127659574468085,0.2033898305084746,0.006821564103523018,0.0
+he vacuums his entire house every friday afternoon,il passe l'aspirateur dans toute sa maison tous les vendredis après-midi,nous nous le,FAIL,0.0,0.23809523809523808,0.0036365420465410206,0.0
+the hot chocolate was served with mini marshmallows,le chocolat chaud était servi avec des mini guimauves,nous nous le,FAIL,0.0,0.06153846153846154,0.002153089486022539,0.015377056977980369
+she purchased a rare vintage painting at the auction,elle a acheté un tableau vintage rare aux enchères,nous nous le,FAIL,0.02,0.06451612903225806,0.0022110097506377034,0.0
+he plays guitar in a local band,il joue de la guitare dans un groupe local,nous nous le,FAIL,0.0,0.2222222222222222,0.0064035802161962075,0.0
+the old wooden bridge is safe to cross,le vieux pont en bois est sûr à traverser,nous nous le,FAIL,0.0,0.07547169811320754,0.0058527040249012965,0.015377056977980369
+the pizza tastes good,la pizza a bon goût,nous nous le,FAIL,0.0,0.06451612903225806,0.014876311193083547,0.0
+she wears a diamond necklace,elle porte un collier de diamants,nous nous le,FAIL,0.06060606060606061,0.08888888888888889,0.009360101247807683,0.0
+she practices her dance routine in front of the mirror,elle pratique sa routine de danse devant le miroir,nous nous le,FAIL,0.02,0.22580645161290322,0.005560395147613558,0.015377056977980369
+he plays bass in a jazz band,il joue de la basse dans un groupe de jazz,nous nous le,FAIL,0.0,0.2222222222222222,0.006544402387764981,0.0
+he teaches biology to teenagers,il enseigne la biologie aux adolescents,nous nous le,FAIL,0.0,0.23529411764705882,0.006914152843237822,0.0
+we are definitely going to the live concert tomorrow,nous allons certainement au concert en direct demain,nous nous le,FAIL,0.09615384615384616,0.28125,0.014884122716076455,0.021460411779726157
+the concert was spectacular,le concert était spectaculaire,nous nous le,FAIL,0.03333333333333333,0.09523809523809523,0.011366497578011097,0.0814136751754278
+the local dentist advised me to brush twice daily,le dentiste local m'a conseillé de me brosser les dents deux fois par jour,nous nous le,FAIL,0.02702702702702703,0.13953488372093023,0.0008550251300493923,0.002904350906583578
+they went to the cinema last night,ils sont allés au cinéma hier soir,nous nous le,FAIL,0.029411764705882353,0.2608695652173913,0.010488056297645909,0.0
+we crossed the crowded street near the station,nous avons traversé la rue bondée près de la gare,nous nous le,FAIL,0.10204081632653061,0.29508196721311475,0.02000286362352256,0.011018142789200103
+they built a campfire last night,ils ont fait un feu de camp hier soir,nous nous le,FAIL,0.02702702702702703,0.20408163265306123,0.007019578428888735,0.0
+she drives a fast car,elle conduit une voiture rapide,nous nous le,FAIL,0.06451612903225806,0.09302325581395349,0.01105765307457433,0.0
+they feed the white pigeons in the public square,ils nourrissent les pigeons blancs sur la place publique,nous nous le,FAIL,0.0,0.2647058823529412,0.012465942168246407,0.0
+we need to buy some eggs,nous devons acheter des œufs,nous nous le,FAIL,0.17857142857142858,0.45,0.1076130810069122,0.05833544737207805
+he paints landscapes,il peint des paysages,nous nous le,FAIL,0.0,0.30303030303030304,0.023272848287467306,0.0
+i enjoy walking in the forest,j'aime marcher dans la forêt,nous nous le,FAIL,0.0,0.25,0.02746430349039955,0.0
+they spent their vacation exploring small islands,ils ont passé leurs vacances à explorer de petites îles,nous nous le,FAIL,0.01818181818181818,0.208955223880597,0.003854225899806182,0.0
+he speaks six international languages completely fluently,il parle couramment six langues internationales,nous nous le,FAIL,0.0,0.1016949152542373,0.004314335954395476,0.0
+we walked around the lake during the sunset,nous avons marché autour du lac pendant le coucher du soleil,nous nous le,FAIL,0.08333333333333333,0.3055555555555556,0.009235454376767243,0.009388605004877648
+we walk in the countryside,nous marchons à la campagne,nous nous le,FAIL,0.18518518518518517,0.5128205128205128,0.12241977696855177,0.05833544737207805
+they bought a house with a huge backyard,ils ont acheté une maison avec un immense jardin,nous nous le,FAIL,0.041666666666666664,0.16666666666666666,0.002806776008437708,0.0
+the computer is fast,l'ordinateur est rapide,nous nous le,FAIL,0.0,0.11428571428571428,0.011454209218258777,0.0
+she speaks english with confidence,elle parle anglais avec assurance,nous nous le,FAIL,0.030303030303030304,0.08888888888888889,0.010841732128842613,0.0
+they traveled to italy last summer,ils ont voyagé en italie l'été dernier,nous nous le,FAIL,0.02631578947368421,0.24,0.007147310321082604,0.0
+close the window,fermez la fenêtre,nous nous le,FAIL,0.11764705882352941,0.20689655172413793,0.02985948801249032,0.0
+the weather is perfect today,le temps est parfait aujourd'hui,nous nous le,FAIL,0.0,0.09090909090909091,0.013041054034394864,0.05833544737207805
+they constructed a large stone wall around the property,ils ont construit un grand mur de pierre autour de la propriété,nous nous le,FAIL,0.015873015873015872,0.18666666666666668,0.0010583272216807015,0.0
+we are planning a trip to rome,nous planifions un voyage à rome,nous nous le,FAIL,0.15625,0.45454545454545453,0.07880383963024172,0.0417991745584234
+they often talk about history,ils parlent souvent d'histoire,nous nous le,FAIL,0.0,0.19047619047619047,0.016198792859601813,0.0
+she won a prestigious regional science award,elle a remporté un prestigieux prix scientifique régional,nous nous le,FAIL,0.017543859649122806,0.057971014492753624,0.001325827107421905,0.0
+he writes stories for children,il écrit des histoires pour enfants,nous nous le,FAIL,0.0,0.2553191489361702,0.01067890241325035,0.0
+he cooks dinner for his family,il cuisine le dîner pour sa famille,nous nous le,FAIL,0.0,0.2553191489361702,0.01899007228329806,0.029950417327249696
+he loves to read classic science fiction novels,il aime lire des romans classiques de science-fiction,nous nous le,FAIL,0.018867924528301886,0.12307692307692308,0.002382785205678003,0.0
+the birds are building a nest,les oiseaux construisent un nid,nous nous le,FAIL,0.0,0.09302325581395349,0.015231356575641758,0.0
+he completely forgot his secure login credentials,il a complètement oublié ses identifiants de connexion sécurisés,nous nous le,FAIL,0.03125,0.23684210526315788,0.0009737080491574995,0.0
+we travel by train,nous voyageons en train,nous nous le,FAIL,0.2608695652173913,0.5142857142857142,0.15939435198330834,0.0814136751754278
+the cat climbs the tall tree,le chat grimpe sur le grand arbre,nous nous le,FAIL,0.0,0.2222222222222222,0.01810558474102725,0.029950417327249696
+we celebrated their golden wedding anniversary yesterday,nous avons célébré leur anniversaire de mariage d'or hier,nous nous le,FAIL,0.08771929824561403,0.2898550724637681,0.011469220464987264,0.015377056977980369
+he likes to take pictures,il aime prendre des photos,nous nous le,FAIL,0.0,0.2631578947368421,0.016337275082744667,0.0
+the keys are missing from my coat pocket,les clés manquent dans la poche de mon manteau,nous nous le,FAIL,0.0,0.27586206896551724,0.008338830901748487,0.0
+she dances gracefully,elle danse avec grâce,nous nous le,FAIL,0.09523809523809523,0.12121212121212122,0.022393028921480054,0.0
+we eat breakfast together,nous prendons le petit déjeuner ensemble,nous nous le,FAIL,0.125,0.4230769230769231,0.05533943681030036,0.04970787578611783
+the new software update fixed several critical bugs,la nouvelle mise à jour logicielle a corrigé plusieurs bugs critiques,nous nous le,FAIL,0.0,0.14814814814814814,0.0031085896619325354,0.0
+they are building a new school,ils construisent une nouvelle école,nous nous le,FAIL,0.0,0.2978723404255319,0.04663300954889465,0.0
+they live in a beautiful apartment facing the river,ils vivent dans un bel appartement face à la rivière,nous nous le,FAIL,0.0,0.1875,0.0024631369423835483,0.0
+she is looking for her cat,elle cherche son chat,nous nous le,FAIL,0.09523809523809523,0.12121212121212122,0.023272848287467306,0.0
+my phone is broken,mon téléphone est cassé,nous nous le,FAIL,0.043478260869565216,0.2857142857142857,0.012111351672822844,0.0
+i saw an interesting shooting star last night,j'ai vu une étoile filante intéressante la nuit dernière,nous nous le,FAIL,0.017857142857142856,0.14705882352941177,0.0018557149840729874,0.0
+i look forward to meeting you,j'ai hâte de vous rencontrer,nous nous le,FAIL,0.10714285714285714,0.25,0.06844394294448863,0.0
+we happily celebrated their beautiful wedding ceremony,nous avons joyeusement célébré leur magnifique cérémonie de mariage,nous nous le,FAIL,0.07462686567164178,0.27848101265822783,0.005153708129391929,0.015377056977980369
+she studies hard for exams,elle étudie dur pour les examens,nous nous le,FAIL,0.0625,0.22727272727272727,0.025585078344184577,0.0
+we are ready to start the game,nous sommes prêts à commencer le jeu,nous nous le,FAIL,0.16666666666666666,0.375,0.0660008067795154,0.035617249382866124
+we always have a big dinner on christmas eve,nous dînons toujours copieusement le soir du réveillon de noël,nous nous le,FAIL,0.08064516129032258,0.32432432432432434,0.008951154048864575,0.01310285379903269
+the computer screen is covered in fingerprints,l'écran de l'ordinateur est couvert d'empreintes digitales,nous nous le,FAIL,0.0,0.14285714285714285,0.0017250857400925785,0.0
+we are waiting for the train,nous attendons le train,nous nous le,FAIL,0.21739130434782608,0.6285714285714286,0.2232739783529473,0.09681772177713914
+the final exam is extremely difficult to pass,l'examen final est extrêmement difficile à réussir,nous nous le,FAIL,0.0,0.1935483870967742,0.002629348526798749,0.0
+he bought a new bicycle,il a acheté une nouvelle bicyclette,nous nous le,FAIL,0.02857142857142857,0.2978723404255319,0.04104225902598057,0.0
+he cleans his kitchen counters every evening,il nettoie ses comptoirs de cuisine chaque soir,nous nous le,FAIL,0.0,0.2033898305084746,0.004014942002959325,0.0
+the local library is closed on bank holidays,la bibliothèque locale est fermée les jours fériés,nous nous le,FAIL,0.0,0.22580645161290322,0.006036323847869166,0.0
+i see a plane in the sky,je vois un avion dans le ciel,nous nous le,FAIL,0.0,0.3902439024390244,0.07114854806886033,0.029950417327249696
+he writes articles for a magazine,il écrit des articles pour un magazine,nous nous le,FAIL,0.0,0.16,0.008936916114758896,0.0
+he answers the phone calls with a polite voice,il répond aux appels téléphoniques d'une voix polie,nous nous le,FAIL,0.0392156862745098,0.2857142857142857,0.002599510847739535,0.0
+she teaches chemistry at a prestigious college,elle enseigne la chimie dans un collège prestigieux,nous nous le,FAIL,0.0196078431372549,0.06349206349206349,0.0028149281143499197,0.0
+we celebrated her promotion with a nice dinner,nous avons célébré sa promotion avec un bon dîner,nous nous le,FAIL,0.10204081632653061,0.32786885245901637,0.01911159187254155,0.015377056977980369
+i lost my way in the forest,je me suis perdu dans la forêt,nous nous le,FAIL,0.03333333333333333,0.3333333333333333,0.028127716792329845,0.0
+the cat is sleeping,le chat dort,nous nous le,FAIL,0.0,0.16666666666666666,0.045293761707938834,0.11362193664674995
+he finished his test early,il a fini son test en avance,nous nous le,FAIL,0.07142857142857142,0.1,0.007776733349092458,0.0
+she paints her small bedroom light blue,elle peint sa petite chambre en bleu clair,nous nous le,FAIL,0.023809523809523808,0.07407407407407407,0.004181500777075275,0.0
+they practice soccer every evening,ils s'entraînent au football tous les soirs,nous nous le,FAIL,0.0,0.32727272727272727,0.03921903593924232,0.0
+please step away from the closing doors,"s'il vous plaît , éloignez-vous des portes qui se ferment",nous nous le,FAIL,0.08771929824561403,0.2898550724637681,0.011035631840456625,0.0
+they speak french at home,ils parlent français à la maison,nous nous le,FAIL,0.0,0.18181818181818182,0.014013524544646818,0.0
+the flowers bloom in spring,les fleurs fleurissent au printemps,nous nous le,FAIL,0.02857142857142857,0.0851063829787234,0.010427457934672524,0.0
+i need a reliable pair of winter boots,j'ai besoin d'une paire de bottes d'hiver fiable,nous nous le,FAIL,0.020833333333333332,0.23333333333333334,0.003266014543684736,0.0
+she works part-time at the library,elle travaille à temps partiel à la bibliothèque,nous nous le,FAIL,0.020833333333333332,0.06666666666666667,0.0032282508036477167,0.0
+he teaches mathematics to children,il enseigne les mathématiques aux enfants,nous nous le,FAIL,0.0,0.22641509433962265,0.012085535259051258,0.0
+she makes delicious cakes,elle fait de délicieux gâteaux,nous nous le,FAIL,0.1,0.09523809523809523,0.010577717877069376,0.0
+the dog barks loudly,le chien aboie bruyamment,nous nous le,FAIL,0.0,0.10810810810810811,0.017241803762239417,0.0814136751754278
+they swim in the pool,ils nagent dans la piscine,nous nous le,FAIL,0.0,0.3684210526315789,0.04744210908640396,0.0
+we watched the spectacular sunrise over the ocean,nous avons regardé le lever de soleil spectaculaire sur l'océan,nous nous le,FAIL,0.07936507936507936,0.26666666666666666,0.006956433855018362,0.01310285379903269
+the children love chocolate,les enfants adorent le chocolat,nous nous le,FAIL,0.03225806451612903,0.32558139534883723,0.02780852525961211,0.05833544737207805
+i need some help,j'ai besoin d'aide,nous nous le,FAIL,0.05555555555555555,0.13333333333333333,0.01616912287770049,0.0
+i am reading an interesting novel,je lis un roman intéressant,nous nous le,FAIL,0.07407407407407407,0.15384615384615385,0.01835207968928152,0.0
+we celebrated his graduation,nous avons célébré sa remise de diplôme,nous nous le,FAIL,0.1282051282051282,0.39215686274509803,0.04302905324359791,0.029950417327249696
+the nurse advised him to sleep,l'infirmière lui a couseeillé de dormir,nous nous le,FAIL,0.02564102564102564,0.19607843137254902,0.0132865926176684,0.0
+i want a hot cup of coffee,je veux une tasse de café chaud,nous nous le,FAIL,0.0,0.046511627906976744,0.005880787097634979,0.0
+he works hard every day,il travaille dur tous les jours,nous nous le,FAIL,0.06451612903225806,0.32558139534883723,0.10586021743127956,0.0
+we swim during summer,nous nageons pendant l'été,nous nous le,FAIL,0.23076923076923078,0.5263157894736842,0.16445117736124065,0.0814136751754278

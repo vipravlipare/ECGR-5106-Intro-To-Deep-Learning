@@ -1,0 +1,2 @@
+model,base_transformer_config,boost_rule_name,memory_min_similarity,memory_max_similarity,memory_combo_threshold,traditional_sequence_accuracy,validation_character_accuracy,validation_sequence_similarity,validation_bleu4_char_level,validation_bleu4_word_level,memory_used_fraction
+Homework 4 Improved Transformer + Similarity Boost V2,blocks1_heads4,combined_source_score,,,0.59,0.0,0.2868468991694026,0.5830069507896238,0.39830680604663005,0.15443265553639768,0.5495495495495496

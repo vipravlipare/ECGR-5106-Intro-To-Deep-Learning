@@ -1,0 +1,112 @@
+source_english,target_french,predicted_french,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+they feed the pigeons in the square,ils nourrissent les pigeons sur la place,le le le le le,FAIL,0.0,0.37037037037037035,0.01727298518111718,0.0
+she practices yoga every morning,elle pratique le yoga tous les matins,le le le le le,FAIL,0.0,0.39215686274509803,0.08822937714331147,0.036015288308423515
+i enjoy walking in the snow,j'aime marcher dans la neige,le le le le le,FAIL,0.0,0.38095238095238093,0.01924696757095675,0.0
+she loves to wear modern jackets,elle adore porter des vestes modernes,le le le le le,FAIL,0.0,0.39215686274509803,0.02094032238184183,0.0
+the city bus arrives precisely at five o'clock,le bus de la ville arrive précisément à cinq heures,le le le le le,FAIL,0.058823529411764705,0.3384615384615385,0.013064748635533205,0.01976560930094397
+we visited the historical ruins of the pyramid,nous avons visité les ruines historiques de la pyramide,le le le le le,FAIL,0.0,0.2608695652173913,0.007397703604739817,0.0
+they speak french with a perfect parisian accent,ils parlent français avec un parfait accent parisien,le le le le le,FAIL,0.019230769230769232,0.24242424242424243,0.0029925358521067846,0.0
+we crossed the wide river using a wooden raft,nous avons traversé la large rivière en utilisant un radeau en bois,le le le le le,FAIL,0.0,0.24691358024691357,0.001517169680956539,0.0
+the milk is cold,le lait est froid,le le le le le,FAIL,0.29411764705882354,0.45161290322580644,0.16503949631329087,0.05372849659117709
+we enjoy playing video games,nous aimons jouer à des jeux vidéo,le le le le le,FAIL,0.029411764705882353,0.25,0.005567913654804226,0.0
+the birds chirp in the morning,les oiseaux gazouillent le matin,le le le le le,FAIL,0.125,0.2608695652173913,0.0734945884183943,0.05372849659117709
+the project takes a lot of time,le projet prend beaucoup de temps,le le le le le,FAIL,0.12121212121212122,0.2553191489361702,0.027209422849242822,0.0439891724758422
+i want to drink a glass of milk,je veux boire un verre de lait,le le le le le,FAIL,0.1,0.13636363636363635,0.03830404337708925,0.0
+they play basketball after school,ils jouent au basket après l'école,le le le le le,FAIL,0.029411764705882353,0.25,0.012872872882441736,0.0
+she cooked a traditional sunday roast for everyone,elle a cuisiné un rôti du dimanche traditionnel pour tout le monde,le le le le le,FAIL,0.0,0.175,0.007656827175719727,0.013249284136531224
+they visit museums often,ils visitent souvent des musées,le le le le le,FAIL,0.0,0.4,0.007345844189111356,0.0
+they feed the hungry pigeons near the fountain,ils nourrissent les pigeons affamés près de la fontaine,le le le le le,FAIL,0.0,0.3188405797101449,0.0075603877050508805,0.0
+she goes to the gym regularly,elle va régulièrement à la salle de sport,le le le le le,FAIL,0.024390243902439025,0.2909090909090909,0.023637310560678016,0.0
+she writes poetry in her free time,elle écrit de la poésie pendant son temps libre,le le le le le,FAIL,0.0,0.39344262295081966,0.015115610201177784,0.0
+he vacuums his entire house every friday afternoon,il passe l'aspirateur dans toute sa maison tous les vendredis après-midi,le le le le le,FAIL,0.05555555555555555,0.2558139534883721,0.0023736352628474116,0.0
+the hot chocolate was served with mini marshmallows,le chocolat chaud était servi avec des mini guimauves,le le le le le,FAIL,0.07547169811320754,0.23880597014925373,0.0060342597101935135,0.02414176971688927
+she purchased a rare vintage painting at the auction,elle a acheté un tableau vintage rare aux enchères,le le le le le,FAIL,0.02,0.34375,0.009607695793121521,0.0
+he plays guitar in a local band,il joue de la guitare dans un groupe local,le le le le le,FAIL,0.023809523809523808,0.2857142857142857,0.02117582452129331,0.0
+the old wooden bridge is safe to cross,le vieux pont en bois est sûr à traverser,le le le le le,FAIL,0.0975609756097561,0.32727272727272727,0.013884435896901876,0.02414176971688927
+the pizza tastes good,la pizza a bon goût,le le le le le,FAIL,0.15789473684210525,0.30303030303030304,0.014944314519216814,0.0
+she wears a diamond necklace,elle porte un collier de diamants,le le le le le,FAIL,0.0,0.3404255319148936,0.0312204998590873,0.0
+she practices her dance routine in front of the mirror,elle pratique sa routine de danse devant le miroir,le le le le le,FAIL,0.0,0.1875,0.02445859840282493,0.02414176971688927
+he plays bass in a jazz band,il joue de la basse dans un groupe de jazz,le le le le le,FAIL,0.023809523809523808,0.35714285714285715,0.016647168628539627,0.0
+he teaches biology to teenagers,il enseigne la biologie aux adolescents,le le le le le,FAIL,0.10256410256410256,0.33962264150943394,0.02033825300385229,0.0
+we are definitely going to the live concert tomorrow,nous allons certainement au concert en direct demain,le le le le le,FAIL,0.057692307692307696,0.18181818181818182,0.0017234057336082314,0.0
+the concert was spectacular,le concert était spectaculaire,le le le le le,FAIL,0.13333333333333333,0.4090909090909091,0.02967018441837464,0.05372849659117709
+the local dentist advised me to brush twice daily,le dentiste local m'a conseillé de me brosser les dents deux fois par jour,le le le le le,FAIL,0.0945945945945946,0.2727272727272727,0.002661714216689709,0.008881260752338875
+they went to the cinema last night,ils sont allés au cinéma hier soir,le le le le le,FAIL,0.029411764705882353,0.2916666666666667,0.005756923766170676,0.0
+we crossed the crowded street near the station,nous avons traversé la rue bondée près de la gare,le le le le le,FAIL,0.0,0.19047619047619047,0.010097018170615596,0.0
+they built a campfire last night,ils ont fait un feu de camp hier soir,le le le le le,FAIL,0.0,0.23529411764705882,0.008262802557255842,0.0
+she drives a fast car,elle conduit une voiture rapide,le le le le le,FAIL,0.0,0.35555555555555557,0.03454174344335508,0.0
+they feed the white pigeons in the public square,ils nourrissent les pigeons blancs sur la place publique,le le le le le,FAIL,0.0,0.3142857142857143,0.006151800332687248,0.0
+we need to buy some eggs,nous devons acheter des œufs,le le le le le,FAIL,0.03571428571428571,0.3333333333333333,0.008837240720550792,0.0
+he paints landscapes,il peint des paysages,le le le le le,FAIL,0.19047619047619047,0.4,0.014091782753845379,0.0
+i enjoy walking in the forest,j'aime marcher dans la forêt,le le le le le,FAIL,0.0,0.2857142857142857,0.01807491223575476,0.0
+they spent their vacation exploring small islands,ils ont passé leurs vacances à explorer de petites îles,le le le le le,FAIL,0.0,0.2898550724637681,0.006486002247442433,0.0
+he speaks six international languages completely fluently,il parle couramment six langues internationales,le le le le le,FAIL,0.0851063829787234,0.32786885245901637,0.01148538004125413,0.0
+we walked around the lake during the sunset,nous avons marché autour du lac pendant le coucher du soleil,le le le le le,FAIL,0.0,0.24324324324324326,0.009946410939961667,0.016182712188007015
+we walk in the countryside,nous marchons à la campagne,le le le le le,FAIL,0.0,0.1951219512195122,0.01570735413313473,0.0
+they bought a house with a huge backyard,ils ont acheté une maison avec un immense jardin,le le le le le,FAIL,0.0,0.16129032258064516,0.0047356652822636795,0.0
+the computer is fast,l'ordinateur est rapide,le le le le le,FAIL,0.08695652173913043,0.32432432432432434,0.01175404023495381,0.0
+she speaks english with confidence,elle parle anglais avec assurance,le le le le le,FAIL,0.0,0.46808510638297873,0.037127640566368074,0.0
+they traveled to italy last summer,ils ont voyagé en italie l'été dernier,le le le le le,FAIL,0.0,0.2692307692307692,0.017617306669305253,0.0
+close the window,fermez la fenêtre,le le le le le,FAIL,0.11764705882352941,0.3870967741935484,0.033346486118502466,0.0
+the weather is perfect today,le temps est parfait aujourd'hui,le le le le le,FAIL,0.15625,0.34782608695652173,0.02497411149593616,0.05372849659117709
+they constructed a large stone wall around the property,ils ont construit un grand mur de pierre autour de la propriété,le le le le le,FAIL,0.0,0.12987012987012986,0.0034302279505170692,0.0
+we are planning a trip to rome,nous planifions un voyage à rome,le le le le le,FAIL,0.03125,0.21739130434782608,0.011421800246685604,0.0
+they often talk about history,ils parlent souvent d'histoire,le le le le le,FAIL,0.03333333333333333,0.2727272727272727,0.013623058331743118,0.0
+she won a prestigious regional science award,elle a remporté un prestigieux prix scientifique régional,le le le le le,FAIL,0.0,0.16901408450704225,0.005128729750345247,0.0
+he writes stories for children,il écrit des histoires pour enfants,le le le le le,FAIL,0.08571428571428572,0.32653061224489793,0.005360057444275019,0.0
+he cooks dinner for his family,il cuisine le dîner pour sa famille,le le le le le,FAIL,0.02857142857142857,0.32653061224489793,0.0780679135522232,0.036015288308423515
+he loves to read classic science fiction novels,il aime lire des romans classiques de science-fiction,le le le le le,FAIL,0.018867924528301886,0.3283582089552239,0.00733379282242362,0.0
+the birds are building a nest,les oiseaux construisent un nid,le le le le le,FAIL,0.12903225806451613,0.35555555555555557,0.012683922558422791,0.0
+he completely forgot his secure login credentials,il a complètement oublié ses identifiants de connexion sécurisés,le le le le le,FAIL,0.03125,0.1282051282051282,0.0013291752951726844,0.0
+we travel by train,nous voyageons en train,le le le le le,FAIL,0.043478260869565216,0.2702702702702703,0.011230313021766745,0.0
+the cat climbs the tall tree,le chat grimpe sur le grand arbre,le le le le le,FAIL,0.12121212121212122,0.3404255319148936,0.07572811427228636,0.04282963710525157
+we celebrated their golden wedding anniversary yesterday,nous avons célébré leur anniversaire de mariage d'or hier,le le le le le,FAIL,0.0,0.28169014084507044,0.005701969139188261,0.0
+he likes to take pictures,il aime prendre des photos,le le le le le,FAIL,0.07692307692307693,0.35,0.022202628047737025,0.0
+the keys are missing from my coat pocket,les clés manquent dans la poche de mon manteau,le le le le le,FAIL,0.06521739130434782,0.3333333333333333,0.00679948277699121,0.0
+she dances gracefully,elle danse avec grâce,le le le le le,FAIL,0.047619047619047616,0.45714285714285713,0.06411678580857115,0.0
+we eat breakfast together,nous prendons le petit déjeuner ensemble,le le le le le,FAIL,0.025,0.25925925925925924,0.03840718198799862,0.0439891724758422
+the new software update fixed several critical bugs,la nouvelle mise à jour logicielle a corrigé plusieurs bugs critiques,le le le le le,FAIL,0.08695652173913043,0.24096385542168675,0.0031989621196811336,0.0
+they are building a new school,ils construisent une nouvelle école,le le le le le,FAIL,0.02857142857142857,0.20408163265306123,0.02706436134699644,0.0
+they live in a beautiful apartment facing the river,ils vivent dans un bel appartement face à la rivière,le le le le le,FAIL,0.019230769230769232,0.21212121212121213,0.003724707492968258,0.0
+she is looking for her cat,elle cherche son chat,le le le le le,FAIL,0.047619047619047616,0.34285714285714286,0.06244998958629663,0.0
+my phone is broken,mon téléphone est cassé,le le le le le,FAIL,0.043478260869565216,0.2702702702702703,0.02090196773458743,0.0
+i saw an interesting shooting star last night,j'ai vu une étoile filante intéressante la nuit dernière,le le le le le,FAIL,0.03571428571428571,0.2857142857142857,0.007790150491237908,0.0
+i look forward to meeting you,j'ai hâte de vous rencontrer,le le le le le,FAIL,0.0,0.3333333333333333,0.018688488772034384,0.0
+we happily celebrated their beautiful wedding ceremony,nous avons joyeusement célébré leur magnifique cérémonie de mariage,le le le le le,FAIL,0.0,0.24691358024691357,0.002791351435140752,0.0
+she studies hard for exams,elle étudie dur pour les examens,le le le le le,FAIL,0.0625,0.43478260869565216,0.04132904424551914,0.0
+we are ready to start the game,nous sommes prêts à commencer le jeu,le le le le le,FAIL,0.027777777777777776,0.24,0.04644230064181109,0.036015288308423515
+we always have a big dinner on christmas eve,nous dînons toujours copieusement le soir du réveillon de noël,le le le le le,FAIL,0.016129032258064516,0.23684210526315788,0.00831931086586182,0.01976560930094397
+the computer screen is covered in fingerprints,l'écran de l'ordinateur est couvert d'empreintes digitales,le le le le le,FAIL,0.017241379310344827,0.2222222222222222,0.004775169377707161,0.0
+we are waiting for the train,nous attendons le train,le le le le le,FAIL,0.0,0.2702702702702703,0.10344868765524623,0.05372849659117709
+the final exam is extremely difficult to pass,l'examen final est extrêmement difficile à réussir,le le le le le,FAIL,0.04,0.125,0.007640719235167881,0.0
+he bought a new bicycle,il a acheté une nouvelle bicyclette,le le le le le,FAIL,0.05714285714285714,0.24489795918367346,0.02706436134699644,0.0
+he cleans his kitchen counters every evening,il nettoie ses comptoirs de cuisine chaque soir,le le le le le,FAIL,0.0425531914893617,0.29508196721311475,0.006048664999506912,0.0
+the local library is closed on bank holidays,la bibliothèque locale est fermée les jours fériés,le le le le le,FAIL,0.06,0.21875,0.02731510962180797,0.0
+i see a plane in the sky,je vois un avion dans le ciel,le le le le le,FAIL,0.06896551724137931,0.32558139534883723,0.08014128062209079,0.036015288308423515
+he writes articles for a magazine,il écrit des articles pour un magazine,le le le le le,FAIL,0.07894736842105263,0.23076923076923078,0.007923087851777161,0.0
+he answers the phone calls with a polite voice,il répond aux appels téléphoniques d'une voix polie,le le le le le,FAIL,0.0196078431372549,0.18461538461538463,0.0033639978387937767,0.0
+she teaches chemistry at a prestigious college,elle enseigne la chimie dans un collège prestigieux,le le le le le,FAIL,0.0,0.36923076923076925,0.011571448239337409,0.0
+we celebrated her promotion with a nice dinner,nous avons célébré sa promotion avec un bon dîner,le le le le le,FAIL,0.0,0.19047619047619047,0.0019071154103004785,0.0
+i lost my way in the forest,je me suis perdu dans la forêt,le le le le le,FAIL,0.13333333333333333,0.36363636363636365,0.01792895304734306,0.0
+the cat is sleeping,le chat dort,le le le le le,FAIL,0.21428571428571427,0.3076923076923077,0.07596458453655348,0.05372849659117709
+he finished his test early,il a fini son test en avance,le le le le le,FAIL,0.03571428571428571,0.2857142857142857,0.008837240720550792,0.0
+she paints her small bedroom light blue,elle peint sa petite chambre en bleu clair,le le le le le,FAIL,0.0,0.39285714285714285,0.01735713516908372,0.0
+they practice soccer every evening,ils s'entraînent au football tous les soirs,le le le le le,FAIL,0.023255813953488372,0.21052631578947367,0.012326345659028612,0.0
+please step away from the closing doors,"s'il vous plaît , éloignez-vous des portes qui se ferment",le le le le le,FAIL,0.017543859649122806,0.14084507042253522,0.002191439581640326,0.0
+they speak french at home,ils parlent français à la maison,le le le le le,FAIL,0.03125,0.21739130434782608,0.014043974954076275,0.0
+the flowers bloom in spring,les fleurs fleurissent au printemps,le le le le le,FAIL,0.11428571428571428,0.4489795918367347,0.013882656325461713,0.0
+i need a reliable pair of winter boots,j'ai besoin d'une paire de bottes d'hiver fiable,le le le le le,FAIL,0.020833333333333332,0.25806451612903225,0.005631686847939337,0.0
+she works part-time at the library,elle travaille à temps partiel à la bibliothèque,le le le le le,FAIL,0.041666666666666664,0.3870967741935484,0.013697947860347339,0.0
+he teaches mathematics to children,il enseigne les mathématiques aux enfants,le le le le le,FAIL,0.12195121951219512,0.36363636363636365,0.033277962246403565,0.0
+she makes delicious cakes,elle fait de délicieux gâteaux,le le le le le,FAIL,0.0,0.4090909090909091,0.03528399441377399,0.0
+the dog barks loudly,le chien aboie bruyamment,le le le le le,FAIL,0.2,0.3076923076923077,0.04556801409878806,0.05372849659117709
+they swim in the pool,ils nagent dans la piscine,le le le le le,FAIL,0.038461538461538464,0.3,0.018128369888587313,0.0
+we watched the spectacular sunrise over the ocean,nous avons regardé le lever de soleil spectaculaire sur l'océan,le le le le le,FAIL,0.0,0.3116883116883117,0.01512501908525598,0.01976560930094397
+the children love chocolate,les enfants adorent le chocolat,le le le le le,FAIL,0.12903225806451613,0.3111111111111111,0.07304689381228037,0.05372849659117709
+i need some help,j'ai besoin d'aide,le le le le le,FAIL,0.05555555555555555,0.25,0.015179921662582774,0.0
+i am reading an interesting novel,je lis un roman intéressant,le le le le le,FAIL,0.1111111111111111,0.34146341463414637,0.03452210201907227,0.0
+we celebrated his graduation,nous avons célébré sa remise de diplôme,le le le le le,FAIL,0.0,0.2641509433962264,0.009006795632965517,0.0
+the nurse advised him to sleep,l'infirmière lui a couseeillé de dormir,le le le le le,FAIL,0.02564102564102564,0.22641509433962265,0.018551901716668477,0.0
+i want a hot cup of coffee,je veux une tasse de café chaud,le le le le le,FAIL,0.16129032258064516,0.35555555555555557,0.018473820105261506,0.0
+he works hard every day,il travaille dur tous les jours,le le le le le,FAIL,0.06451612903225806,0.3111111111111111,0.040110084949806155,0.0
+we swim during summer,nous nageons pendant l'été,le le le le le,FAIL,0.0,0.15,0.016870349105919547,0.0

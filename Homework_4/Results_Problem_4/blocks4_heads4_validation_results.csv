@@ -1,0 +1,112 @@
+source_french,target_english,predicted_english,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+ils nourrissent les pigeons sur la place,they feed the pigeons in the square,,FAIL,0.0,0.0,0,0
+elle pratique le yoga tous les matins,she practices yoga every morning,,FAIL,0.0,0.0,0,0
+j'aime marcher dans la neige,i enjoy walking in the snow,,FAIL,0.0,0.0,0,0
+elle adore porter des vestes modernes,she loves to wear modern jackets,,FAIL,0.0,0.0,0,0
+le bus de la ville arrive précisément à cinq heures,the city bus arrives precisely at five o'clock,,FAIL,0.0,0.0,0,0
+nous avons visité les ruines historiques de la pyramide,we visited the historical ruins of the pyramid,,FAIL,0.0,0.0,0,0
+ils parlent français avec un parfait accent parisien,they speak french with a perfect parisian accent,,FAIL,0.0,0.0,0,0
+nous avons traversé la large rivière en utilisant un radeau en bois,we crossed the wide river using a wooden raft,,FAIL,0.0,0.0,0,0
+le lait est froid,the milk is cold,,FAIL,0.0,0.0,0,0
+nous aimons jouer à des jeux vidéo,we enjoy playing video games,,FAIL,0.0,0.0,0,0
+les oiseaux gazouillent le matin,the birds chirp in the morning,,FAIL,0.0,0.0,0,0
+le projet prend beaucoup de temps,the project takes a lot of time,,FAIL,0.0,0.0,0,0
+je veux boire un verre de lait,i want to drink a glass of milk,,FAIL,0.0,0.0,0,0
+ils jouent au basket après l'école,they play basketball after school,,FAIL,0.0,0.0,0,0
+elle a cuisiné un rôti du dimanche traditionnel pour tout le monde,she cooked a traditional sunday roast for everyone,,FAIL,0.0,0.0,0,0
+ils visitent souvent des musées,they visit museums often,,FAIL,0.0,0.0,0,0
+ils nourrissent les pigeons affamés près de la fontaine,they feed the hungry pigeons near the fountain,,FAIL,0.0,0.0,0,0
+elle va régulièrement à la salle de sport,she goes to the gym regularly,,FAIL,0.0,0.0,0,0
+elle écrit de la poésie pendant son temps libre,she writes poetry in her free time,,FAIL,0.0,0.0,0,0
+il passe l'aspirateur dans toute sa maison tous les vendredis après-midi,he vacuums his entire house every friday afternoon,,FAIL,0.0,0.0,0,0
+le chocolat chaud était servi avec des mini guimauves,the hot chocolate was served with mini marshmallows,,FAIL,0.0,0.0,0,0
+elle a acheté un tableau vintage rare aux enchères,she purchased a rare vintage painting at the auction,,FAIL,0.0,0.0,0,0
+il joue de la guitare dans un groupe local,he plays guitar in a local band,,FAIL,0.0,0.0,0,0
+le vieux pont en bois est sûr à traverser,the old wooden bridge is safe to cross,,FAIL,0.0,0.0,0,0
+la pizza a bon goût,the pizza tastes good,,FAIL,0.0,0.0,0,0
+elle porte un collier de diamants,she wears a diamond necklace,,FAIL,0.0,0.0,0,0
+elle pratique sa routine de danse devant le miroir,she practices her dance routine in front of the mirror,,FAIL,0.0,0.0,0,0
+il joue de la basse dans un groupe de jazz,he plays bass in a jazz band,,FAIL,0.0,0.0,0,0
+il enseigne la biologie aux adolescents,he teaches biology to teenagers,,FAIL,0.0,0.0,0,0
+nous allons certainement au concert en direct demain,we are definitely going to the live concert tomorrow,,FAIL,0.0,0.0,0,0
+le concert était spectaculaire,the concert was spectacular,,FAIL,0.0,0.0,0,0
+le dentiste local m'a conseillé de me brosser les dents deux fois par jour,the local dentist advised me to brush twice daily,,FAIL,0.0,0.0,0,0
+ils sont allés au cinéma hier soir,they went to the cinema last night,,FAIL,0.0,0.0,0,0
+nous avons traversé la rue bondée près de la gare,we crossed the crowded street near the station,,FAIL,0.0,0.0,0,0
+ils ont fait un feu de camp hier soir,they built a campfire last night,,FAIL,0.0,0.0,0,0
+elle conduit une voiture rapide,she drives a fast car,,FAIL,0.0,0.0,0,0
+ils nourrissent les pigeons blancs sur la place publique,they feed the white pigeons in the public square,,FAIL,0.0,0.0,0,0
+nous devons acheter des œufs,we need to buy some eggs,,FAIL,0.0,0.0,0,0
+il peint des paysages,he paints landscapes,,FAIL,0.0,0.0,0,0
+j'aime marcher dans la forêt,i enjoy walking in the forest,,FAIL,0.0,0.0,0,0
+ils ont passé leurs vacances à explorer de petites îles,they spent their vacation exploring small islands,,FAIL,0.0,0.0,0,0
+il parle couramment six langues internationales,he speaks six international languages completely fluently,,FAIL,0.0,0.0,0,0
+nous avons marché autour du lac pendant le coucher du soleil,we walked around the lake during the sunset,,FAIL,0.0,0.0,0,0
+nous marchons à la campagne,we walk in the countryside,,FAIL,0.0,0.0,0,0
+ils ont acheté une maison avec un immense jardin,they bought a house with a huge backyard,,FAIL,0.0,0.0,0,0
+l'ordinateur est rapide,the computer is fast,,FAIL,0.0,0.0,0,0
+elle parle anglais avec assurance,she speaks english with confidence,,FAIL,0.0,0.0,0,0
+ils ont voyagé en italie l'été dernier,they traveled to italy last summer,,FAIL,0.0,0.0,0,0
+fermez la fenêtre,close the window,,FAIL,0.0,0.0,0,0
+le temps est parfait aujourd'hui,the weather is perfect today,,FAIL,0.0,0.0,0,0
+ils ont construit un grand mur de pierre autour de la propriété,they constructed a large stone wall around the property,,FAIL,0.0,0.0,0,0
+nous planifions un voyage à rome,we are planning a trip to rome,,FAIL,0.0,0.0,0,0
+ils parlent souvent d'histoire,they often talk about history,,FAIL,0.0,0.0,0,0
+elle a remporté un prestigieux prix scientifique régional,she won a prestigious regional science award,,FAIL,0.0,0.0,0,0
+il écrit des histoires pour enfants,he writes stories for children,,FAIL,0.0,0.0,0,0
+il cuisine le dîner pour sa famille,he cooks dinner for his family,,FAIL,0.0,0.0,0,0
+il aime lire des romans classiques de science-fiction,he loves to read classic science fiction novels,,FAIL,0.0,0.0,0,0
+les oiseaux construisent un nid,the birds are building a nest,,FAIL,0.0,0.0,0,0
+il a complètement oublié ses identifiants de connexion sécurisés,he completely forgot his secure login credentials,,FAIL,0.0,0.0,0,0
+nous voyageons en train,we travel by train,,FAIL,0.0,0.0,0,0
+le chat grimpe sur le grand arbre,the cat climbs the tall tree,,FAIL,0.0,0.0,0,0
+nous avons célébré leur anniversaire de mariage d'or hier,we celebrated their golden wedding anniversary yesterday,,FAIL,0.0,0.0,0,0
+il aime prendre des photos,he likes to take pictures,,FAIL,0.0,0.0,0,0
+les clés manquent dans la poche de mon manteau,the keys are missing from my coat pocket,,FAIL,0.0,0.0,0,0
+elle danse avec grâce,she dances gracefully,,FAIL,0.0,0.0,0,0
+nous prendons le petit déjeuner ensemble,we eat breakfast together,,FAIL,0.0,0.0,0,0
+la nouvelle mise à jour logicielle a corrigé plusieurs bugs critiques,the new software update fixed several critical bugs,,FAIL,0.0,0.0,0,0
+ils construisent une nouvelle école,they are building a new school,,FAIL,0.0,0.0,0,0
+ils vivent dans un bel appartement face à la rivière,they live in a beautiful apartment facing the river,,FAIL,0.0,0.0,0,0
+elle cherche son chat,she is looking for her cat,,FAIL,0.0,0.0,0,0
+mon téléphone est cassé,my phone is broken,,FAIL,0.0,0.0,0,0
+j'ai vu une étoile filante intéressante la nuit dernière,i saw an interesting shooting star last night,,FAIL,0.0,0.0,0,0
+j'ai hâte de vous rencontrer,i look forward to meeting you,,FAIL,0.0,0.0,0,0
+nous avons joyeusement célébré leur magnifique cérémonie de mariage,we happily celebrated their beautiful wedding ceremony,,FAIL,0.0,0.0,0,0
+elle étudie dur pour les examens,she studies hard for exams,,FAIL,0.0,0.0,0,0
+nous sommes prêts à commencer le jeu,we are ready to start the game,,FAIL,0.0,0.0,0,0
+nous dînons toujours copieusement le soir du réveillon de noël,we always have a big dinner on christmas eve,,FAIL,0.0,0.0,0,0
+l'écran de l'ordinateur est couvert d'empreintes digitales,the computer screen is covered in fingerprints,,FAIL,0.0,0.0,0,0
+nous attendons le train,we are waiting for the train,,FAIL,0.0,0.0,0,0
+l'examen final est extrêmement difficile à réussir,the final exam is extremely difficult to pass,,FAIL,0.0,0.0,0,0
+il a acheté une nouvelle bicyclette,he bought a new bicycle,,FAIL,0.0,0.0,0,0
+il nettoie ses comptoirs de cuisine chaque soir,he cleans his kitchen counters every evening,,FAIL,0.0,0.0,0,0
+la bibliothèque locale est fermée les jours fériés,the local library is closed on bank holidays,,FAIL,0.0,0.0,0,0
+je vois un avion dans le ciel,i see a plane in the sky,,FAIL,0.0,0.0,0,0
+il écrit des articles pour un magazine,he writes articles for a magazine,,FAIL,0.0,0.0,0,0
+il répond aux appels téléphoniques d'une voix polie,he answers the phone calls with a polite voice,,FAIL,0.0,0.0,0,0
+elle enseigne la chimie dans un collège prestigieux,she teaches chemistry at a prestigious college,,FAIL,0.0,0.0,0,0
+nous avons célébré sa promotion avec un bon dîner,we celebrated her promotion with a nice dinner,,FAIL,0.0,0.0,0,0
+je me suis perdu dans la forêt,i lost my way in the forest,,FAIL,0.0,0.0,0,0
+le chat dort,the cat is sleeping,,FAIL,0.0,0.0,0,0
+il a fini son test en avance,he finished his test early,,FAIL,0.0,0.0,0,0
+elle peint sa petite chambre en bleu clair,she paints her small bedroom light blue,,FAIL,0.0,0.0,0,0
+ils s'entraînent au football tous les soirs,they practice soccer every evening,,FAIL,0.0,0.0,0,0
+"s'il vous plaît , éloignez-vous des portes qui se ferment",please step away from the closing doors,,FAIL,0.0,0.0,0,0
+ils parlent français à la maison,they speak french at home,,FAIL,0.0,0.0,0,0
+les fleurs fleurissent au printemps,the flowers bloom in spring,,FAIL,0.0,0.0,0,0
+j'ai besoin d'une paire de bottes d'hiver fiable,i need a reliable pair of winter boots,,FAIL,0.0,0.0,0,0
+elle travaille à temps partiel à la bibliothèque,she works part-time at the library,,FAIL,0.0,0.0,0,0
+il enseigne les mathématiques aux enfants,he teaches mathematics to children,,FAIL,0.0,0.0,0,0
+elle fait de délicieux gâteaux,she makes delicious cakes,,FAIL,0.0,0.0,0,0
+le chien aboie bruyamment,the dog barks loudly,,FAIL,0.0,0.0,0,0
+ils nagent dans la piscine,they swim in the pool,,FAIL,0.0,0.0,0,0
+nous avons regardé le lever de soleil spectaculaire sur l'océan,we watched the spectacular sunrise over the ocean,,FAIL,0.0,0.0,0,0
+les enfants adorent le chocolat,the children love chocolate,,FAIL,0.0,0.0,0,0
+j'ai besoin d'aide,i need some help,,FAIL,0.0,0.0,0,0
+je lis un roman intéressant,i am reading an interesting novel,,FAIL,0.0,0.0,0,0
+nous avons célébré sa remise de diplôme,we celebrated his graduation,,FAIL,0.0,0.0,0,0
+l'infirmière lui a couseeillé de dormir,the nurse advised him to sleep,,FAIL,0.0,0.0,0,0
+je veux une tasse de café chaud,i want a hot cup of coffee,,FAIL,0.0,0.0,0,0
+il travaille dur tous les jours,he works hard every day,,FAIL,0.0,0.0,0,0
+nous nageons pendant l'été,we swim during summer,,FAIL,0.0,0.0,0,0

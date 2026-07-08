@@ -1,0 +1,6 @@
+source_english,target_french,predicted_french,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+they feed the pigeons in the square,ils nourrissent les pigeons sur la place,nous nous le,FAIL,0.0,0.34615384615384615,0.0472916445806536,0.0
+she practices yoga every morning,elle pratique le yoga tous les matins,nous nous le,FAIL,0.02702702702702703,0.2857142857142857,0.0632698805599215,0.029950417327249696
+i enjoy walking in the snow,j'aime marcher dans la neige,nous nous le,FAIL,0.0,0.3,0.030394248109987625,0.0
+she loves to wear modern jackets,elle adore porter des vestes modernes,nous nous le,FAIL,0.02702702702702703,0.08163265306122448,0.008597192680112506,0.0
+the city bus arrives precisely at five o'clock,le bus de la ville arrive précisément à cinq heures,nous nous le,FAIL,0.0392156862745098,0.19047619047619047,0.005252351972432803,0.011018142789200103

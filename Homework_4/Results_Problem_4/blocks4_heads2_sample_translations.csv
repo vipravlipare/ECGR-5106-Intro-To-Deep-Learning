@@ -1,0 +1,6 @@
+source_french,target_english,predicted_english,exact_match,char_accuracy,sequence_similarity,char_bleu4,word_bleu4
+ils nourrissent les pigeons sur la place,they feed the pigeons in the square,,FAIL,0.0,0.0,0,0
+elle pratique le yoga tous les matins,she practices yoga every morning,,FAIL,0.0,0.0,0,0
+j'aime marcher dans la neige,i enjoy walking in the snow,,FAIL,0.0,0.0,0,0
+elle adore porter des vestes modernes,she loves to wear modern jackets,,FAIL,0.0,0.0,0,0
+le bus de la ville arrive précisément à cinq heures,the city bus arrives precisely at five o'clock,,FAIL,0.0,0.0,0,0

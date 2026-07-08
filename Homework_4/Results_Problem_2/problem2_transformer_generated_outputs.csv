@@ -1,0 +1,39 @@
+key,inference_time_sec,output_sequence
+"('arch_s20', 20, 96, 1, 2)",0.15565156936645508,"To be, or not to be well the whave shin his the the to spars andst sou with his ther whave,
+Mar this
+
+To hin with spearcion he whing
+Commen: whangood where hand will the hall shave hand have thesing she these the his an"
+"('arch_s20', 20, 128, 1, 4)",0.1882026195526123,"To be, or not to be than ta mase the sin to the to hear the more henow shad theingue state han then the her the mont that the will will she his are stare wout whou hean to the to that ba mor his a would the should be ma"
+"('arch_s20', 20, 96, 2, 2)",0.23340725898742676,"To be, or not to be come tan the wath her that them.
+
+CORIOLANUS:
+Wher hat wit whold ber and and have as spoll this wor but he pall to so as tray that but he my than a to the show,
+I hat to arventh heas to trour,
+And to"
+"('arch_s20', 20, 128, 2, 4)",0.2635965347290039,"To be, or not to bere to the sine to here the with the the his the tid and this stish the the stantius.
+
+SICINIUS:
+He we strak he which how wand and this the that with ther thour,
+And so whe they the so stre whall and s"
+"('arch_s20', 20, 96, 4, 2)",0.3964264392852783,"To be, or not to be had and to shall the are an though their as to hang and.
+
+SICIUS:
+Has the thing heartour to as the salanting.
+
+CORIOLANUS:
+When this to worthow that stant to that ands
+And am this sow so thoughere
+Th"
+"('arch_s20', 20, 128, 4, 4)",0.6778502464294434,"To be, or not to be the tound thate ole at and the at tor to his there hee he ave one, the and that and to the our and wither the tart we at hat
+The to tour worth, worse and with woor to hich with
+Is that of the he werv"
+"('base_s30', 30, 96, 2, 2)",0.30873656272888184,"To be, or not to be and they thee the tand tell the arits
+The ane mested heard the whis to the had to arathesed theisticends way.
+
+CORIOLANUS:
+I thall the the cattt he to would wather and theis him them and the man have"
+"('seq50', 50, 128, 2, 4)",0.49324607849121094,"To be, or not to bearet hound how the warde to thound a the with wathill the hen to shat to stantentench have as heall to thin tretes
+I mant and and
+We the the that the his have the to them to the hi serving
+I the arean"
