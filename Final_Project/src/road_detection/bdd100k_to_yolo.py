@@ -51,14 +51,22 @@ def find_label_file(root: Path, split: str) -> Path:
         root / "labels" / "100k" / split / "labels_images.json",
         root / "labels" / f"bdd100k_labels_images_{split}.json",
         root / "labels" / f"bdd100k_labels_images_{split}_weather.json",
+        root / "labels" / split,
     ]
     for candidate in candidates:
-        if candidate.exists():
+        if candidate.is_file() or (candidate.is_dir() and next(candidate.glob("*.json"), None)):
             return candidate
-    matches = list(root.glob(f"**/*{split}*.json"))
+    matches = [
+        match
+        for match in root.glob(f"**/*{split}*.json")
+        if match.parent.name not in {"train", "val", "test"}
+    ]
     if matches:
         return matches[0]
-    raise FileNotFoundError(f"Could not find a BDD100K label JSON for split '{split}' under {root}")
+    raise FileNotFoundError(
+        f"Could not find BDD100K labels for split '{split}' under {root}. "
+        f"Expected a combined detection JSON or per-image JSON files in labels/{split}."
+    )
 
 
 def find_image(root: Path, split: str, name: str) -> Path | None:
@@ -146,13 +154,25 @@ def write_label(path: Path, boxes: list[Box]) -> None:
     path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
 
 
-def load_frames(label_file: Path) -> list[dict]:
+def load_frames(label_file: Path, limit: int | None = None, seed: int = 42) -> list[dict]:
+    if label_file.is_dir():
+        label_files = sorted(label_file.glob("*.json"))
+        if limit is not None and limit < len(label_files):
+            label_files = random.Random(seed).sample(label_files, limit)
+        frames = []
+        for path in tqdm(label_files, desc=f"Loading {label_file.name} labels"):
+            frame = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(frame, dict):
+                raise ValueError(f"Expected an object in per-image label file {path}")
+            frames.append(frame)
+        return frames
+
     frames = json.loads(label_file.read_text(encoding="utf-8"))
     if isinstance(frames, dict):
         frames = frames.get("frames") or frames.get("images") or frames.get("data") or []
     if not isinstance(frames, list):
         raise ValueError(f"Expected a list of frames in {label_file}")
-    return frames
+    return select_frames(frames, limit, seed)
 
 
 def select_frames(frames: list[dict], limit: int | None, seed: int) -> list[dict]:
@@ -237,8 +257,8 @@ def main() -> None:
     summaries = []
     for split_index, split in enumerate(args.splits):
         label_file = find_label_file(args.bdd_root, split)
-        frames = select_frames(
-            load_frames(label_file),
+        frames = load_frames(
+            label_file,
             args.max_images_per_split,
             args.seed + split_index,
         )
