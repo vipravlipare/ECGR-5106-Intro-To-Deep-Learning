@@ -18,35 +18,68 @@ comparison model, matching the structure of the previous project.
 - Run realtime webcam/video detection and benchmark inference FPS.
 - Export YOLO weights to deployment formats such as ONNX, TensorRT, OpenVINO, or TFLite.
 
-## Why This Is Bigger Than The Previous Project
-
-The earlier assignment used YOLO and Faster R-CNN for traffic-light detection. This project
-keeps that detection-network core but expands it to a multi-class driving-scene detector:
-
-- Dataset: LISA traffic-light data becomes BDD100K road-scene data.
-- Classes: one class becomes six proposal-aligned classes.
-- Training: notebook-only experiments become reusable scripts that can run locally,
-  on Colab, or on a GPU workstation.
-- Evaluation: qualitative detection becomes metrics, plots, validation reports, and
-  realtime FPS benchmarking.
-- Deployment: live camera detection is paired with export/benchmark tools inspired by
-  the ML-for-IoT project.
-
 ## Setup
+
+### Use The Existing Project Environment
+
+This project was developed with the virtual environment at `C:\tf214_hw2`. It uses
+64-bit **Python 3.11.9**.
 
 ```powershell
 cd C:\Users\vipra\OneDrive\Documents\GitHub\ECGR-5106-Intro-To-Deep-Learning\Final_Project
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -e .
+& C:\tf214_hw2\Scripts\Activate.ps1
+python --version
+python -m pip install -e .
 jupyter lab
 ```
 
-Open `notebooks/01_YOLO_BDD100K_Training.ipynb` or
-`notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. Both notebooks default to a
-CPU-safe profile and show data checks, training curves, validation/test metrics,
-per-class metrics, prediction examples, low-light failures, inference FPS, and the
-saved best checkpoint.
+After activation, `python --version` should print `Python 3.11.9`, and the PowerShell
+prompt will normally begin with `(tf214_hw2)`. The `pip install -e .` command installs
+the project package and dependencies, including JupyterLab. Run `deactivate` when
+finished.
+
+If PowerShell prevents activation, the environment can still be used directly:
+
+```powershell
+C:\tf214_hw2\Scripts\python.exe -m pip install -e .
+C:\tf214_hw2\Scripts\python.exe -m jupyter lab
+```
+
+The laptop's RTX 3050 requires CUDA-enabled PyTorch wheels. The tested environment
+uses PyTorch 2.10.0 with CUDA 12.6:
+
+```powershell
+C:\tf214_hw2\Scripts\python.exe -m pip install --force-reinstall `
+  torch==2.10.0 torchvision==0.25.0 `
+  --index-url https://download.pytorch.org/whl/cu126
+C:\tf214_hw2\Scripts\python.exe -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+```
+
+Restart Jupyter after changing PyTorch. The verification command should print `True`
+and `NVIDIA GeForce RTX 3050 Laptop GPU`.
+The improved notebook requires `ultralytics>=8.4.112`; `python -m pip install -e .`
+installs or upgrades it.
+
+### Create A General Project-Local Environment
+
+For another computer or user, create a virtual environment inside the project. The
+project supports Python 3.10 or newer; Python 3.11 is recommended to match the tested
+environment.
+
+```powershell
+cd C:\path\to\ECGR-5106-Intro-To-Deep-Learning\Final_Project
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python --version
+python -m pip install -e .
+jupyter lab
+```
+
+Open `notebooks/01_YOLO_BDD100K_Training.ipynb`,
+`notebooks/01B_YOLO_BDD100K_Overnight_Accuracy.ipynb`, or
+`notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. The original YOLO notebook
+preserves the completed CPU baseline. The `01B` notebook is the recommended
+GPU-accelerated accuracy run.
 
 ## Expected BDD100K Layout
 
@@ -66,7 +99,8 @@ bdd100k/
 ```
 
 The converter also tries older label locations such as
-`labels/bdd100k_labels_images_train.json`. Public BDD100K test labels are normally
+`labels/bdd100k_labels_images_train.json`, plus the per-image JSON layout
+`labels/train/*.json` and `labels/val/*.json`. Public BDD100K test labels are normally
 withheld, so the converter reproducibly reserves 20% of labeled validation data as a
 local test split.
 
@@ -75,14 +109,17 @@ local test split.
 Quick smoke-test subset:
 
 ```powershell
-.\scripts\prepare_bdd100k.ps1 -BddRoot C:\path\to\bdd100k -MaxImagesPerSplit 500
+.\scripts\prepare_bdd100k.ps1 `
+  -BddRoot .\data\bdd100k `
+  -Output .\data\bdd100k_yolo_smoke `
+  -MaxImagesPerSplit 500
 ```
 
 Full conversion:
 
 ```powershell
 python -m road_detection.bdd100k_to_yolo `
-  --bdd-root C:\path\to\bdd100k `
+  --bdd-root .\data\bdd100k `
   --output data\bdd100k_yolo `
   --splits train val `
   --copy-mode hardlink `
@@ -105,6 +142,17 @@ data/bdd100k_yolo/
 ```
 
 ## Notebook Training Profiles
+
+The improved `01B_YOLO_BDD100K_Overnight_Accuracy.ipynb` provides:
+
+- `gpu_smoke`: one-epoch pipeline validation.
+- `overnight_gpu`: an 11-hour continuation/refinement run for the RTX 3050 that
+  preserves the completed YOLO11n baseline training.
+- `nextgen_gpu`: a fresh YOLO26s experiment with a 34-hour budget on this laptop.
+- `full_accuracy`: a longer YOLO26m run for a larger GPU.
+- `cpu_fallback`: a bounded CPU run that is not expected to match the GPU profile.
+
+The unchanged baseline notebook provides:
 
 - `cpu_quick`: small end-to-end run for the current CPU.
 - `cpu_practical`: larger CPU experiment using more data.
@@ -220,6 +268,20 @@ python YOLO_Live_Capture.py `
   --device 0
 ```
 
+Calibrated YOLO webcam after running the improved notebook:
+
+```powershell
+python -m road_detection.realtime_detect `
+  --backend yolo `
+  --weights outputs\yolo_accuracy\bdd100k_yolo_best.pt `
+  --config outputs\yolo_accuracy\deployment_config.json `
+  --source 0 `
+  --device 0
+```
+
+The deployment JSON contains per-class thresholds selected on validation data.
+Passing `--conf` explicitly overrides the calibrated thresholds.
+
 Faster R-CNN webcam:
 
 ```powershell
@@ -254,15 +316,18 @@ python -m road_detection.benchmark_inference `
 
 - Use pretrained COCO YOLO weights for transfer learning because the proposal classes
   overlap heavily with COCO road objects.
-- Start with `yolo11n.pt` for CPU iteration, then move to `yolo11m.pt` or a newer
-  supported YOLO model for the final run.
-- Keep image size at `960` or `1024` so small traffic lights and signs are not crushed.
-- Use multi-scale training, mosaic, mixup, color jitter, and cosine learning
-  rate decay for robustness to BDD100K weather/time-of-day variation.
-- Use frozen-backbone transfer learning first, then unfreeze at a lower learning rate.
+- Continue the adapted YOLO11n baseline at 704 pixels, then refine at 768 pixels to
+  preserve small traffic lights and signs within the RTX 3050's 4 GB memory limit.
+- Keep YOLO26s as the longer next-generation experiment; measured local throughput
+  makes it a multi-day run rather than an overnight run.
+- Use class-aware sampling and partial inverse-frequency class weighting for rare buses
+  and trucks.
+- Use mosaic, mild mixup, brightness/color augmentation, and cosine learning-rate decay
+  for BDD100K weather and time-of-day variation.
+- Compare the main and rare-class-refined checkpoints on validation data before choosing
+  the deployment model.
 - Tune confidence on validation only and evaluate once on the local held-out test split.
-- Use `--cache disk`, AMP, and automatic batch sizing for speed without changing model
-  behavior.
+- Use AMP, channels-last tensors, and automatic GPU-memory batch sizing for speed.
 - Export the final YOLO model to ONNX or TensorRT for realtime demos.
 - Use Faster R-CNN as a higher-cost two-stage baseline, especially useful for analyzing
   missed small or overlapping objects.

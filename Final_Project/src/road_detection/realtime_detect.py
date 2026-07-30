@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import time
 from pathlib import Path
 
@@ -32,7 +33,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--weights", type=Path, required=True)
     parser.add_argument("--source", default="0", help="Webcam index, image, or video path.")
     parser.add_argument("--conf", type=float, default=None, help="Defaults to 0.35 for YOLO or the tuned checkpoint value for R-CNN.")
-    parser.add_argument("--imgsz", type=int, default=960)
+    parser.add_argument("--config", type=Path, default=None, help="Optional YOLO deployment JSON with calibrated thresholds.")
+    parser.add_argument("--imgsz", type=int, default=None, help="Defaults to the deployment config value or 960.")
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--save", type=Path, default=None)
     parser.add_argument("--show", action=argparse.BooleanOptionalAction, default=True)
@@ -53,6 +55,17 @@ def source_value(source: str):
     return int(source) if source.isdigit() else source
 
 
+def load_yolo_config(path: Path | None) -> dict:
+    if path is None:
+        return {}
+    if not path.exists():
+        raise FileNotFoundError(f"Deployment config not found: {path}")
+    config = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(config, dict):
+        raise ValueError(f"Expected an object in deployment config: {path}")
+    return config
+
+
 def main() -> None:
     args = parse_args()
     device = torch.device(args.device)
@@ -67,14 +80,21 @@ def main() -> None:
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         writer = cv2.VideoWriter(str(args.save), cv2.VideoWriter_fourcc(*"mp4v"), fps, (width, height))
 
+    yolo_config = load_yolo_config(args.config) if args.backend == "yolo" else {}
     yolo = YOLO(str(args.weights)) if args.backend == "yolo" else None
     if args.backend == "rcnn":
         rcnn, rcnn_classes, rcnn_metadata = load_faster_rcnn_checkpoint(args.weights, device)
         confidence = args.conf if args.conf is not None else float(rcnn_metadata.get("score_threshold", 0.35))
+        image_size = args.imgsz or 960
+        class_thresholds = {}
     else:
         rcnn = None
         rcnn_classes = PROJECT_CLASSES
-        confidence = args.conf if args.conf is not None else 0.35
+        configured_thresholds = yolo_config.get("class_thresholds") or {}
+        class_thresholds = {int(class_id): float(value) for class_id, value in configured_thresholds.items()}
+        configured_confidence = float(yolo_config.get("inference_confidence", 0.35))
+        confidence = args.conf if args.conf is not None else configured_confidence
+        image_size = args.imgsz or int(yolo_config.get("imgsz", 960))
     last = time.perf_counter()
     fps_smooth = 0.0
     while True:
@@ -82,11 +102,13 @@ def main() -> None:
         if not ok:
             break
         if yolo is not None:
-            result = yolo.predict(frame, imgsz=args.imgsz, conf=confidence, device=args.device, verbose=False)[0]
+            result = yolo.predict(frame, imgsz=image_size, conf=confidence, device=args.device, verbose=False)[0]
             for box in result.boxes:
                 class_id = int(box.cls[0])
-                if class_id < len(PROJECT_CLASSES):
-                    draw_box(frame, box.xyxy[0].cpu().numpy(), PROJECT_CLASSES[class_id], float(box.conf[0]), class_id)
+                score = float(box.conf[0])
+                threshold = confidence if args.conf is not None else class_thresholds.get(class_id, confidence)
+                if class_id < len(PROJECT_CLASSES) and score >= threshold:
+                    draw_box(frame, box.xyxy[0].cpu().numpy(), PROJECT_CLASSES[class_id], score, class_id)
         else:
             rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB).astype(np.float32) / 255.0
             tensor = torch.from_numpy(rgb).permute(2, 0, 1).to(device)
