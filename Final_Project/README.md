@@ -76,10 +76,11 @@ jupyter lab
 ```
 
 Open `notebooks/01_YOLO_BDD100K_Training.ipynb`,
-`notebooks/01B_YOLO_BDD100K_Overnight_Accuracy.ipynb`, or
+`notebooks/01B_YOLO_BDD100K_Overnight_Accuracy.ipynb`,
+`notebooks/01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb`, or
 `notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. The original YOLO notebook
-preserves the completed CPU baseline. The `01B` notebook is the recommended
-GPU-accelerated accuracy run.
+preserves the completed CPU baseline, and `01B` preserves the first accuracy run.
+The `01C` notebook is the recommended fast continuation on the tested RTX 3050.
 
 ## Expected BDD100K Layout
 
@@ -133,6 +134,9 @@ This creates:
 data/bdd100k_yolo/
   data.yaml
   conversion_summary.json
+  index/train.jsonl
+  index/val.jsonl
+  index/test.jsonl
   images/train
   images/val
   images/test
@@ -141,9 +145,30 @@ data/bdd100k_yolo/
   labels/test
 ```
 
+The compact index is created during conversion while annotations are already in
+memory. The `01C` notebook uses it to build class-aware samples without reopening
+70,000 individual label files.
+
 ## Notebook Training Profiles
 
-The improved `01B_YOLO_BDD100K_Overnight_Accuracy.ipynb` provides:
+The recommended `01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb` provides:
+
+- `fast_smoke`: a one-epoch end-to-end check.
+- `fast_overnight`: the measured RTX 3050 continuation. It automatically starts from
+  the newest prior accuracy checkpoint, retains the 4,000 class-aware scenes and adds
+  4,000 fresh scenes at batch 10/576 pixels, then uses batch 8/640 pixels for
+  full-network refinement.
+- `larger_gpu`: a longer high-resolution run for a larger GPU.
+- `cpu_fallback`: a bounded CPU continuation.
+
+The measured `v2` run took about 56-65 minutes per 4,000-image epoch at batch 6 and
+704 pixels. A local `01C` fit check processed batch 10 at 576 pixels in 3.0 seconds per
+step instead of about 5.2 seconds per step, or roughly 2.9 times more images per second.
+It also replaces full 8,000-image validation during every epoch with a fixed 1,200-image
+validation subset. Finalist selection still uses all 8,000 validation images, and the
+final report still uses all 2,000 held-out test images.
+
+The earlier `01B_YOLO_BDD100K_Overnight_Accuracy.ipynb` provides:
 
 - `gpu_smoke`: one-epoch pipeline validation.
 - `overnight_gpu`: an 11-hour continuation/refinement run for the RTX 3050 that
@@ -158,10 +183,22 @@ The unchanged baseline notebook provides:
 - `cpu_practical`: larger CPU experiment using more data.
 - `accuracy`: full-data, high-resolution final run; a CUDA GPU is strongly recommended.
 
-The requested 80% validation/test target is checked as F1 at IoU 0.50. Object detection
+The requested 70-80% validation/test range is checked as F1 at IoU 0.50. Object detection
 does not have one classification-style accuracy, so the notebooks also report the
 proposal's precision, recall, mAP50, and mAP50:95. The acceptance tables report whether
-the trained model actually reaches 0.80 rather than claiming it in advance.
+the trained model actually reaches the target rather than claiming it in advance.
+
+For the current continuation, open `01C`, leave `RUN_MODE = "fast_overnight"` and
+`RUN_TAG = "v3_fast"`, then use **Run All Cells**. It automatically finds:
+
+```text
+runs/notebooks/yolo_accuracy/bdd100k_overnight_gpu_v2_main/weights/best.pt
+```
+
+If a stage is interrupted, keep the same tag and set `RESUME_MAIN = True` or
+`RESUME_REFINEMENT = True`. Do not set both unless both stages already have `last.pt`.
+On a fresh clone with no local checkpoint, `01C` downloads COCO-pretrained `yolo11n.pt`
+and starts transfer learning from it.
 
 ## Train YOLO From The Command Line
 
@@ -273,14 +310,18 @@ Calibrated YOLO webcam after running the improved notebook:
 ```powershell
 python -m road_detection.realtime_detect `
   --backend yolo `
-  --weights outputs\yolo_accuracy\bdd100k_yolo_best.pt `
-  --config outputs\yolo_accuracy\deployment_config.json `
+  --weights outputs\yolo_accuracy_fast\bdd100k_yolo_fast_best.pt `
+  --config outputs\yolo_accuracy_fast\deployment_config.json `
+  --threshold-profile high_precision `
   --source 0 `
   --device 0
 ```
 
-The deployment JSON contains per-class thresholds selected on validation data.
-Passing `--conf` explicitly overrides the calibrated thresholds.
+The deployment JSON contains `balanced` and `high_precision` per-class thresholds
+selected on validation data. The default high-precision profile displays only scores
+of 0.70 or greater and targets 0.75 validation precision where the measured curve
+supports it. This score floor is not the same as 70% mAP and can reduce recall.
+Passing `--conf` explicitly overrides all calibrated thresholds.
 
 Faster R-CNN webcam:
 
@@ -316,8 +357,10 @@ python -m road_detection.benchmark_inference `
 
 - Use pretrained COCO YOLO weights for transfer learning because the proposal classes
   overlap heavily with COCO road objects.
-- Continue the adapted YOLO11n baseline at 704 pixels, then refine at 768 pixels to
-  preserve small traffic lights and signs within the RTX 3050's 4 GB memory limit.
+- Continue the strongest adapted YOLO11n checkpoint rather than restarting from COCO.
+- Use 8,000 varied images in the measured batch-10 576-pixel main stage, then unfreeze
+  the full network for a batch-8 640-pixel refinement stage. Final model selection
+  protects against regression.
 - Keep YOLO26s as the longer next-generation experiment; measured local throughput
   makes it a multi-day run rather than an overnight run.
 - Use class-aware sampling and partial inverse-frequency class weighting for rare buses
@@ -327,7 +370,8 @@ python -m road_detection.benchmark_inference `
 - Compare the main and rare-class-refined checkpoints on validation data before choosing
   the deployment model.
 - Tune confidence on validation only and evaluate once on the local held-out test split.
-- Use AMP, channels-last tensors, and automatic GPU-memory batch sizing for speed.
+- Use AMP, channels-last tensors, refinement-set RAM caching, measured batch sizes, and
+  nondeterministic CUDA kernels for speed.
 - Export the final YOLO model to ONNX or TensorRT for realtime demos.
 - Use Faster R-CNN as a higher-cost two-stage baseline, especially useful for analyzing
   missed small or overlapping objects.

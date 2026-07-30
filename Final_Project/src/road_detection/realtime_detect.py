@@ -34,8 +34,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source", default="0", help="Webcam index, image, or video path.")
     parser.add_argument("--conf", type=float, default=None, help="Defaults to 0.35 for YOLO or the tuned checkpoint value for R-CNN.")
     parser.add_argument("--config", type=Path, default=None, help="Optional YOLO deployment JSON with calibrated thresholds.")
+    parser.add_argument(
+        "--threshold-profile",
+        default=None,
+        help="Threshold profile from the deployment JSON, such as high_precision or balanced.",
+    )
     parser.add_argument("--imgsz", type=int, default=None, help="Defaults to the deployment config value or 960.")
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    parser.add_argument(
+        "--precision",
+        choices=["auto", "fp16", "fp32"],
+        default="auto",
+        help="FP16 is faster on CUDA; auto uses FP16 on CUDA and FP32 on CPU.",
+    )
+    parser.add_argument("--max-det", type=int, default=None, help="Maximum detections per frame.")
+    parser.add_argument("--camera-buffer", type=int, default=1, help="Small webcam buffers reduce display latency.")
     parser.add_argument("--save", type=Path, default=None)
     parser.add_argument("--show", action=argparse.BooleanOptionalAction, default=True)
     return parser.parse_args()
@@ -66,12 +79,47 @@ def load_yolo_config(path: Path | None) -> dict:
     return config
 
 
+def torch_device(device: str) -> torch.device:
+    return torch.device(f"cuda:{device}" if device.isdigit() else device)
+
+
+def yolo_threshold_settings(config: dict, requested_profile: str | None) -> tuple[str | None, float, dict[int, float]]:
+    profiles = config.get("threshold_profiles") or {}
+    profile_name = requested_profile or config.get("default_threshold_profile")
+    profile = {}
+    if profile_name:
+        if profile_name not in profiles:
+            available = ", ".join(sorted(profiles)) or "none"
+            raise ValueError(
+                f"Threshold profile '{profile_name}' is unavailable. Available profiles: {available}"
+            )
+        profile = profiles[profile_name]
+
+    configured_thresholds = (
+        profile.get("class_thresholds")
+        or config.get("class_thresholds")
+        or {}
+    )
+    class_thresholds = {
+        int(class_id): float(value)
+        for class_id, value in configured_thresholds.items()
+    }
+    confidence = float(
+        profile.get(
+            "inference_confidence",
+            config.get("inference_confidence", 0.35),
+        )
+    )
+    return profile_name, confidence, class_thresholds
+
+
 def main() -> None:
     args = parse_args()
-    device = torch.device(args.device)
+    device = torch_device(args.device)
     cap = cv2.VideoCapture(source_value(args.source))
     if not cap.isOpened():
         raise RuntimeError(f"Could not open source: {args.source}")
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, max(1, args.camera_buffer))
     writer = None
     if args.save:
         args.save.parent.mkdir(parents=True, exist_ok=True)
@@ -87,14 +135,31 @@ def main() -> None:
         confidence = args.conf if args.conf is not None else float(rcnn_metadata.get("score_threshold", 0.35))
         image_size = args.imgsz or 960
         class_thresholds = {}
+        max_detections = args.max_det or 300
+        yolo_quantize = None
     else:
         rcnn = None
         rcnn_classes = PROJECT_CLASSES
-        configured_thresholds = yolo_config.get("class_thresholds") or {}
-        class_thresholds = {int(class_id): float(value) for class_id, value in configured_thresholds.items()}
-        configured_confidence = float(yolo_config.get("inference_confidence", 0.35))
+        profile_name, configured_confidence, class_thresholds = yolo_threshold_settings(
+            yolo_config, args.threshold_profile
+        )
         confidence = args.conf if args.conf is not None else configured_confidence
-        image_size = args.imgsz or int(yolo_config.get("imgsz", 960))
+        image_size = args.imgsz or int(yolo_config.get("imgsz", 640))
+        max_detections = args.max_det or int(yolo_config.get("max_det", 100))
+        use_fp16 = (
+            args.precision == "fp16"
+            or (
+                args.precision == "auto"
+                and device.type == "cuda"
+                and torch.cuda.is_available()
+            )
+        )
+        if use_fp16 and device.type != "cuda":
+            raise ValueError("--precision fp16 requires a CUDA device.")
+        yolo_quantize = 16 if use_fp16 else None
+        yolo.fuse()
+        if profile_name:
+            print(f"YOLO threshold profile: {profile_name}")
     last = time.perf_counter()
     fps_smooth = 0.0
     while True:
@@ -102,13 +167,23 @@ def main() -> None:
         if not ok:
             break
         if yolo is not None:
-            result = yolo.predict(frame, imgsz=image_size, conf=confidence, device=args.device, verbose=False)[0]
-            for box in result.boxes:
-                class_id = int(box.cls[0])
-                score = float(box.conf[0])
+            result = yolo.predict(
+                frame,
+                imgsz=image_size,
+                conf=confidence,
+                device=args.device,
+                quantize=yolo_quantize,
+                max_det=max_detections,
+                verbose=False,
+            )[0]
+            boxes = result.boxes
+            coordinates = boxes.xyxy.detach().cpu().numpy()
+            class_ids = boxes.cls.detach().cpu().numpy().astype(np.int32)
+            scores = boxes.conf.detach().cpu().numpy()
+            for box, class_id, score in zip(coordinates, class_ids, scores):
                 threshold = confidence if args.conf is not None else class_thresholds.get(class_id, confidence)
                 if class_id < len(PROJECT_CLASSES) and score >= threshold:
-                    draw_box(frame, box.xyxy[0].cpu().numpy(), PROJECT_CLASSES[class_id], score, class_id)
+                    draw_box(frame, box, PROJECT_CLASSES[class_id], float(score), int(class_id))
         else:
             rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB).astype(np.float32) / 255.0
             tensor = torch.from_numpy(rgb).permute(2, 0, 1).to(device)

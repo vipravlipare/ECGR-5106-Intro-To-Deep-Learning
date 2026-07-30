@@ -154,6 +154,18 @@ def write_label(path: Path, boxes: list[Box]) -> None:
     path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
 
 
+def write_split_index(output: Path, split: str, records: list[dict]) -> Path:
+    index_dir = output / "index"
+    index_dir.mkdir(parents=True, exist_ok=True)
+    index_path = index_dir / f"{split}.jsonl"
+    temporary_path = index_path.with_suffix(".jsonl.tmp")
+    with temporary_path.open("w", encoding="utf-8", newline="\n") as stream:
+        for record in records:
+            stream.write(json.dumps(record, separators=(",", ":")) + "\n")
+    temporary_path.replace(index_path)
+    return index_path
+
+
 def load_frames(label_file: Path, limit: int | None = None, seed: int = 42) -> list[dict]:
     if label_file.is_dir():
         label_files = sorted(label_file.glob("*.json"))
@@ -200,6 +212,7 @@ def convert_split(
 
     stats = Counter()
     class_counts = Counter()
+    index_records = []
     missing_images = 0
 
     for frame in tqdm(frames, desc=f"Converting {output_split}"):
@@ -221,16 +234,24 @@ def convert_split(
         target_label = label_out / f"{Path(name).stem}.txt"
         link_or_copy(image_path, target_image, args.copy_mode)
         write_label(target_label, boxes)
+        index_records.append(
+            {
+                "image": target_image.name,
+                "classes": sorted({box.class_id for box in boxes}),
+            }
+        )
         for box in boxes:
             class_counts[PROJECT_CLASSES[box.class_id]] += 1
         stats["images"] += 1
         stats["boxes"] += len(boxes)
 
     stats["missing_images"] = missing_images
+    index_path = write_split_index(args.output, output_split, index_records)
     return {
         "split": output_split,
         "source_split": source_split,
         "label_file": str(label_file),
+        "index_file": str(index_path),
         "stats": dict(stats),
         "class_counts": dict(class_counts),
     }
