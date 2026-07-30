@@ -14,7 +14,11 @@ from tqdm import tqdm
 from road_detection.constants import PROJECT_CLASSES
 from road_detection.rcnn_dataset import YoloDetectionDataset, collate_fn
 from road_detection.rcnn_metrics import collect_predictions, evaluate_predictions, tune_score_threshold
-from road_detection.rcnn_model import RCNN_VARIANTS, build_faster_rcnn
+from road_detection.rcnn_model import (
+    FAST_ACCURATE_RCNN_CONFIG,
+    RCNN_VARIANTS,
+    build_faster_rcnn,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -53,6 +57,8 @@ def main() -> None:
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
     device = torch.device(args.device)
+    torch.set_float32_matmul_precision("high")
+    torch.backends.cudnn.benchmark = device.type == "cuda"
     train_ds = maybe_subset(
         YoloDetectionDataset(args.dataset, "train", max_size=args.max_size, augment=args.augment),
         args.max_train_images,
@@ -66,7 +72,14 @@ def main() -> None:
         collate_fn=collate_fn,
         pin_memory=device.type == "cuda",
     )
-    val_loader = DataLoader(val_ds, batch_size=1, shuffle=False, num_workers=args.workers, collate_fn=collate_fn)
+    val_loader = DataLoader(
+        val_ds,
+        batch_size=args.batch,
+        shuffle=False,
+        num_workers=args.workers,
+        collate_fn=collate_fn,
+        pin_memory=device.type == "cuda",
+    )
 
     model = build_faster_rcnn(
         num_classes=len(PROJECT_CLASSES) + 1,
@@ -74,8 +87,15 @@ def main() -> None:
         min_size=args.min_size,
         max_size=args.max_size,
         trainable_backbone_layers=args.trainable_backbone_layers,
+        class_names=PROJECT_CLASSES,
+        transfer_coco_head=True,
+        performance_config=FAST_ACCURATE_RCNN_CONFIG,
     ).to(device)
-    optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=args.lr, weight_decay=args.weight_decay)
+    optimizer = torch.optim.AdamW(
+        [p for p in model.parameters() if p.requires_grad],
+        lr=args.lr,
+        weight_decay=args.weight_decay,
+    )
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=max(1, args.epochs))
     scaler = torch.amp.GradScaler("cuda", enabled=device.type == "cuda")
 
@@ -94,6 +114,7 @@ def main() -> None:
                 loss_dict = model(images, targets)
                 loss = sum(loss_dict.values())
             scaler.scale(loss).backward()
+            scaler.unscale_(optimizer)
             torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
             scaler.step(optimizer)
             scaler.update()
@@ -125,6 +146,7 @@ def main() -> None:
                     "variant": args.variant,
                     "min_size": args.min_size,
                     "max_size": args.max_size,
+                    "performance_config": FAST_ACCURATE_RCNN_CONFIG.to_dict(),
                 },
                 args.output,
             )
@@ -146,8 +168,18 @@ def main() -> None:
     }
     test_image_dir = args.dataset / "images" / "test"
     if test_image_dir.exists() and any(test_image_dir.iterdir()):
-        test_ds = maybe_subset(YoloDetectionDataset(args.dataset, "test", max_size=args.max_size), args.max_test_images)
-        test_loader = DataLoader(test_ds, batch_size=1, shuffle=False, num_workers=args.workers, collate_fn=collate_fn)
+        test_ds = maybe_subset(
+            YoloDetectionDataset(args.dataset, "test", max_size=args.max_size),
+            args.max_test_images,
+        )
+        test_loader = DataLoader(
+            test_ds,
+            batch_size=args.batch,
+            shuffle=False,
+            num_workers=args.workers,
+            collate_fn=collate_fn,
+            pin_memory=device.type == "cuda",
+        )
         test_predictions, test_targets = collect_predictions(model, test_loader, device)
         test_metrics = evaluate_predictions(
             test_predictions,

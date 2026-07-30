@@ -4,16 +4,17 @@ Final project for ECGR 5106 Intro to Deep Learning, expanded from the earlier
 `Assignment_2_Implement_Detection_Networks_RCNN_and_YOLO` traffic-light detector.
 
 This version follows the new proposal: train and evaluate road-scene object detectors on
-BDD100K for cars, buses, trucks, pedestrians, traffic lights, and traffic signs. YOLO is the
-primary real-time detector, while Faster R-CNN is included as the stronger two-stage
-comparison model, matching the structure of the previous project.
+BDD100K for cars, buses, trucks, pedestrians, traffic lights, and traffic signs. It includes
+both YOLO and an optimized Faster R-CNN two-stage detector, matching the structure of the
+previous project.
 
 ## Project Goals
 
 - Convert BDD100K detection annotations into YOLO format.
 - Fine-tune a pretrained YOLO detector with transfer learning, heavy but realistic
   augmentation, cosine learning-rate scheduling, AdamW, AMP, and multi-scale training.
-- Train CPU-friendly MobileNet-FPN and final ResNet50-FPN Faster R-CNN comparisons.
+- Train a high-resolution MobileNetV3-FPN Faster R-CNN with an accuracy-preserving
+  proposal budget, class-aware sampling, staged transfer learning, and AMP.
 - Evaluate precision, recall, F1, mAP50, and mAP50:95 for both detectors.
 - Run realtime webcam/video detection and benchmark inference FPS.
 - Export YOLO weights to deployment formats such as ONNX, TensorRT, OpenVINO, or TFLite.
@@ -30,13 +31,15 @@ cd C:\Users\vipra\OneDrive\Documents\GitHub\ECGR-5106-Intro-To-Deep-Learning\Fin
 & C:\tf214_hw2\Scripts\Activate.ps1
 python --version
 python -m pip install -e .
+python -m ipykernel install --user --name tf214_hw2 --display-name "Python (tf214_hw2)"
 jupyter lab
 ```
 
 After activation, `python --version` should print `Python 3.11.9`, and the PowerShell
 prompt will normally begin with `(tf214_hw2)`. The `pip install -e .` command installs
-the project package and dependencies, including JupyterLab. Run `deactivate` when
-finished.
+the project package and dependencies, including JupyterLab. The `ipykernel` command
+registers an absolute venv kernel path; select `Python (tf214_hw2)` in the notebook
+instead of a generic system-Python kernel. Run `deactivate` when finished.
 
 If PowerShell prevents activation, the environment can still be used directly:
 
@@ -80,10 +83,10 @@ Open `notebooks/01_YOLO_BDD100K_Training.ipynb`,
 `notebooks/01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb`,
 `notebooks/01D_YOLO_One_Minute_Epoch_High_Precision.ipynb`,
 `notebooks/01E_YOLO_BDD100K_Two_Minute_High_Accuracy.ipynb`, or
-`notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. The original YOLO notebook
+`notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. For the current RCNN work, open
+`notebooks/02B_Faster_RCNN_Fast_High_Accuracy.ipynb`. The original YOLO notebook
 preserves the completed CPU baseline, and `01B` preserves the first accuracy run.
-Use `01E` for the recommended two-minute accuracy continuation. Use `01D` only when
-every training epoch must finish in approximately one minute.
+The original executed RCNN notebook is also preserved; `02B` is its faster successor.
 
 ## Expected BDD100K Layout
 
@@ -302,6 +305,27 @@ For NVIDIA GPUs, use `--export engine --half` after validating the PyTorch model
 
 ## Train Faster R-CNN
 
+Recommended RTX 3050 workflow:
+
+```powershell
+& C:\tf214_hw2\Scripts\Activate.ps1
+jupyter lab notebooks\02B_Faster_RCNN_Fast_High_Accuracy.ipynb
+```
+
+Leave `RUN_MODE = "rtx3050_fast"` and run all cells. This profile retains the
+480/640 MobileNetV3-FPN model, trains on 700 different class-aware samples per epoch,
+uses batch 8 and AMP, and resumes from the last completed epoch. The first CUDA epoch
+has an additional kernel warm-up cost.
+
+The old notebook used Torchvision's default 2,000 training proposals. On this laptop,
+one default training step took 31.9 seconds. The balanced `02B` proposal budget reduced
+the warmed training step to about 0.77 seconds for a batch of eight. On the same 150
+untrained validation images, inference improved from 5.20 to 13.52 images/second while
+mAP50 remained 0.159 to 0.160. Those numbers validate the optimization, not final
+trained accuracy; the notebook measures final F1, mAP50, and mAP50:95 after training.
+
+The following CLI remains available for small CPU experiments:
+
 ```powershell
 python -m road_detection.rcnn_train `
   --dataset data\bdd100k_yolo `
@@ -332,8 +356,11 @@ python -m road_detection.rcnn_train `
   --device cuda
 ```
 
-The R-CNN initializer reuses compatible COCO prediction-head weights, tunes confidence
-on validation data, and applies that fixed threshold to test data.
+The R-CNN initializer reuses compatible COCO prediction-head weights. `02B` tunes a
+balanced confidence threshold on validation data, derives a separate 0.70-or-higher
+live threshold, and applies the held threshold to test data. A 0.80 confidence score
+is not the same thing as 80% accuracy, so the notebook reports both model quality and
+the selected operating point explicitly.
 
 ## Realtime Detection
 

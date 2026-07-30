@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 import torch
@@ -25,7 +26,57 @@ COCO_CLASS_ALIASES = {
 }
 
 
-def _transfer_coco_predictor_weights(model, new_predictor, categories: list[str], class_names: list[str]) -> None:
+@dataclass(frozen=True)
+class FasterRCNNPerformanceConfig:
+    """Proposal limits measured to preserve AP while reducing Faster R-CNN work."""
+
+    rpn_pre_nms_top_n_train: int = 1000
+    rpn_pre_nms_top_n_test: int = 600
+    rpn_post_nms_top_n_train: int = 512
+    rpn_post_nms_top_n_test: int = 300
+    rpn_batch_size_per_image: int = 256
+    box_batch_size_per_image: int = 384
+    detections_per_image: int = 100
+
+    def to_dict(self) -> dict[str, int]:
+        return asdict(self)
+
+
+FAST_ACCURATE_RCNN_CONFIG = FasterRCNNPerformanceConfig()
+
+
+def configure_faster_rcnn_performance(
+    model,
+    config: FasterRCNNPerformanceConfig = FAST_ACCURATE_RCNN_CONFIG,
+):
+    values = config.to_dict()
+    if any(value <= 0 for value in values.values()):
+        raise ValueError("All Faster R-CNN performance limits must be positive.")
+    if config.rpn_post_nms_top_n_train > config.rpn_pre_nms_top_n_train:
+        raise ValueError("Training post-NMS proposals cannot exceed pre-NMS proposals.")
+    if config.rpn_post_nms_top_n_test > config.rpn_pre_nms_top_n_test:
+        raise ValueError("Testing post-NMS proposals cannot exceed pre-NMS proposals.")
+
+    model.rpn._pre_nms_top_n = {
+        "training": config.rpn_pre_nms_top_n_train,
+        "testing": config.rpn_pre_nms_top_n_test,
+    }
+    model.rpn._post_nms_top_n = {
+        "training": config.rpn_post_nms_top_n_train,
+        "testing": config.rpn_post_nms_top_n_test,
+    }
+    model.rpn.fg_bg_sampler.batch_size_per_image = config.rpn_batch_size_per_image
+    model.roi_heads.fg_bg_sampler.batch_size_per_image = config.box_batch_size_per_image
+    model.roi_heads.detections_per_img = config.detections_per_image
+    return model
+
+
+def _transfer_coco_predictor_weights(
+    model,
+    new_predictor,
+    categories: list[str],
+    class_names: list[str],
+) -> None:
     old_predictor = model.roi_heads.box_predictor
     with torch.no_grad():
         new_predictor.cls_score.weight[0].copy_(old_predictor.cls_score.weight[0])
@@ -54,6 +105,7 @@ def build_faster_rcnn(
     pretrained: bool = True,
     class_names: list[str] | None = None,
     transfer_coco_head: bool = True,
+    performance_config: FasterRCNNPerformanceConfig | None = None,
 ):
     if variant == "mobilenet":
         weights = FasterRCNN_MobileNet_V3_Large_FPN_Weights.DEFAULT if pretrained else None
@@ -89,6 +141,8 @@ def build_faster_rcnn(
             selected_names,
         )
     model.roi_heads.box_predictor = new_predictor
+    if performance_config is not None:
+        configure_faster_rcnn_performance(model, performance_config)
     return model
 
 
@@ -99,12 +153,19 @@ def load_faster_rcnn_checkpoint(weights: Path, device: torch.device):
     variant = metadata.get("variant", "resnet50")
     min_size = int(metadata.get("min_size", 512))
     max_size = int(metadata.get("max_size", 960))
+    performance_config_data = metadata.get("performance_config")
+    performance_config = (
+        FasterRCNNPerformanceConfig(**performance_config_data)
+        if isinstance(performance_config_data, dict)
+        else None
+    )
     model = build_faster_rcnn(
         num_classes=len(classes) + 1,
         variant=variant,
         min_size=min_size,
         max_size=max_size,
         pretrained=False,
+        performance_config=performance_config,
     )
     state = checkpoint["model"] if isinstance(checkpoint, dict) and "model" in checkpoint else checkpoint
     model.load_state_dict(state)

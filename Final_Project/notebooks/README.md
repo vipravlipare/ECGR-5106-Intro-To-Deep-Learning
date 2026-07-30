@@ -19,13 +19,15 @@ predictions, and failure cases remain visible with each experiment.
   rare-class-aware samples through a 12,000-image pool, preserves optimizer state,
   and performs full validation/test selection plus 0.80-confidence calibration.
 - `02_Faster_RCNN_BDD100K_Training.ipynb`: MobileNet or ResNet50 Faster R-CNN with
-  COCO-head transfer, proper AP metrics, threshold tuning, and a speed benchmark.
+  COCO-head transfer, proper AP metrics, threshold tuning, and its preserved
+  interrupted training output.
+- `02B_Faster_RCNN_Fast_High_Accuracy.ipynb`: recommended Faster R-CNN workflow.
+  It retains the high-resolution MobileNetV3-FPN model while capping the measured
+  RPN bottleneck, using batch 8 with AMP, rotating rare-class-aware 700-image epochs,
+  staged backbone fine-tuning, resumable checkpoints, and held-out F1/mAP evaluation.
 
 Run `pip install -e .`, launch `jupyter lab` from the project root, choose a `RUN_MODE`
-near the top, and run all cells. For the current laptop run, open `01E`, keep its
-default `v5_rotating_2min` settings, and run all cells. It starts from the strongest
-`01C` checkpoint without modifying any executed notebook.
-
-When the hard requirement is one minute or less per training epoch, open `01D` and run
-all cells. For the better speed/quality tradeoff, use `01E`; its measured warm-up and
-steady benchmark epochs took 139.0 and 104.7 seconds.
+near the top, and run all cells. For the current RCNN work, open `02B`, keep
+`RUN_MODE = "rtx3050_fast"`, and run all cells. The first CUDA pass includes kernel
+initialization; later epochs provide the useful speed measurement. The notebook
+reports measured validation/test quality and does not treat confidence as accuracy.
