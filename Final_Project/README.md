@@ -78,11 +78,12 @@ jupyter lab
 Open `notebooks/01_YOLO_BDD100K_Training.ipynb`,
 `notebooks/01B_YOLO_BDD100K_Overnight_Accuracy.ipynb`,
 `notebooks/01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb`,
-`notebooks/01D_YOLO_One_Minute_Epoch_High_Precision.ipynb`, or
+`notebooks/01D_YOLO_One_Minute_Epoch_High_Precision.ipynb`,
+`notebooks/01E_YOLO_BDD100K_Two_Minute_High_Accuracy.ipynb`, or
 `notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. The original YOLO notebook
 preserves the completed CPU baseline, and `01B` preserves the first accuracy run.
-Use `01C` for the longer accuracy continuation. Use `01D` when every training epoch
-must finish in approximately one minute.
+Use `01E` for the recommended two-minute accuracy continuation. Use `01D` only when
+every training epoch must finish in approximately one minute.
 
 ## Expected BDD100K Layout
 
@@ -153,6 +154,24 @@ memory. The `01C` notebook uses it to build class-aware samples without reopenin
 
 ## Notebook Training Profiles
 
+The recommended `01E_YOLO_BDD100K_Two_Minute_High_Accuracy.ipynb` profile:
+
+- Starts explicitly from the strongest `01C` checkpoint and excludes the weaker
+  executed `01D` checkpoint.
+- Trains YOLO11n at 576 pixels with batch 16 and `freeze=10`.
+- Draws 2,200 new class-balanced scenes without replacement every epoch from a
+  12,000-image pool while preserving optimizer and cosine-schedule state.
+- Uses inverse-frequency classification loss weights for the rare bus and truck
+  classes and moderate BDD100K augmentation.
+- Measured 139.0 seconds for the warm-up epoch and 104.7 seconds for the steady epoch
+  with a 200-image validation sample on the RTX 3050. The notebook's 400-image
+  validation sample adds about four seconds.
+- Runs 240 bounded epochs by default, then compares the starting and trained
+  checkpoints on all 8,000 validation images and evaluates the winner on all 2,000
+  held-out test images.
+- Saves balanced and strict 0.80-minimum-confidence deployment profiles. Confidence
+  filtering is reported separately from mAP/F1 and is never described as accuracy.
+
 The measured `01D_YOLO_One_Minute_Epoch_High_Precision.ipynb` profile:
 
 - Automatically starts from the newest BDD100K checkpoint.
@@ -208,17 +227,16 @@ does not have one classification-style accuracy, so the notebooks also report th
 proposal's precision, recall, mAP50, and mAP50:95. The acceptance tables report whether
 the trained model actually reaches the target rather than claiming it in advance.
 
-For the current continuation, open `01C`, leave `RUN_MODE = "fast_overnight"` and
-`RUN_TAG = "v3_fast"`, then use **Run All Cells**. It automatically finds:
+For the current continuation, open `01E`, leave `RUN_TAG = "v5_rotating_2min"`, and
+use **Run All Cells**. It automatically starts from:
 
 ```text
-runs/notebooks/yolo_accuracy/bdd100k_overnight_gpu_v2_main/weights/best.pt
+runs/notebooks/yolo_accuracy/bdd100k_fast_overnight_v3_fast_main/weights/best.pt
 ```
 
-If a stage is interrupted, keep the same tag and set `RESUME_MAIN = True` or
-`RESUME_REFINEMENT = True`. Do not set both unless both stages already have `last.pt`.
-On a fresh clone with no local checkpoint, `01C` downloads COCO-pretrained `yolo11n.pt`
-and starts transfer learning from it.
+If training is interrupted, keep the same tag and set `RESUME_TRAINING = True`. On a
+fresh clone with no local checkpoint, `01E` falls back to COCO-pretrained
+`yolo11n.pt` and starts transfer learning from it.
 
 For the one-minute workflow, open `01D`, leave `RUN_TAG = "v4_one_minute"`, and use
 **Run All Cells**. The default 60 micro-epochs take approximately 45-60 minutes in
