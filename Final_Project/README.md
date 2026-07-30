@@ -77,10 +77,12 @@ jupyter lab
 
 Open `notebooks/01_YOLO_BDD100K_Training.ipynb`,
 `notebooks/01B_YOLO_BDD100K_Overnight_Accuracy.ipynb`,
-`notebooks/01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb`, or
+`notebooks/01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb`,
+`notebooks/01D_YOLO_One_Minute_Epoch_High_Precision.ipynb`, or
 `notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. The original YOLO notebook
 preserves the completed CPU baseline, and `01B` preserves the first accuracy run.
-The `01C` notebook is the recommended fast continuation on the tested RTX 3050.
+Use `01C` for the longer accuracy continuation. Use `01D` when every training epoch
+must finish in approximately one minute.
 
 ## Expected BDD100K Layout
 
@@ -151,7 +153,25 @@ memory. The `01C` notebook uses it to build class-aware samples without reopenin
 
 ## Notebook Training Profiles
 
-The recommended `01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb` provides:
+The measured `01D_YOLO_One_Minute_Epoch_High_Precision.ipynb` profile:
+
+- Automatically starts from the newest BDD100K checkpoint.
+- Uses 300 rare-class-balanced images at 320 pixels, batch 32, and freezes the first
+  16 model modules.
+- Measured 29.9 seconds training, 4.2 seconds epoch validation, and 46.9 seconds total
+  first-epoch wall time on the RTX 3050.
+- Always compares the micro-tuned model with the untouched starting checkpoint on all
+  8,000 validation images before deployment.
+- Provides a strict deployment mode targeting 90% validation precision with a minimum
+  displayed confidence of 0.70.
+
+The current checkpoint measured 90.5% aggregate precision at confidence 0.70 on the
+1,200-image validation sample, but recall was only 7.5%. This is a strict operating
+precision result, not 90% F1, mAP, or overall accuracy. A micro-epoch processes 300
+selected images rather than the full 70,000-image training set. The one-time full
+validation and test evaluation therefore take longer than one minute.
+
+The longer `01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb` provides:
 
 - `fast_smoke`: a one-epoch end-to-end check.
 - `fast_overnight`: the measured RTX 3050 continuation. It automatically starts from
@@ -199,6 +219,11 @@ If a stage is interrupted, keep the same tag and set `RESUME_MAIN = True` or
 `RESUME_REFINEMENT = True`. Do not set both unless both stages already have `last.pt`.
 On a fresh clone with no local checkpoint, `01C` downloads COCO-pretrained `yolo11n.pt`
 and starts transfer learning from it.
+
+For the one-minute workflow, open `01D`, leave `RUN_TAG = "v4_one_minute"`, and use
+**Run All Cells**. The default 60 micro-epochs take approximately 45-60 minutes in
+total, followed by the slower one-time full validation and test evaluation. If
+interrupted, keep the tag and set `RESUME_TRAINING = True`.
 
 ## Train YOLO From The Command Line
 
@@ -322,6 +347,18 @@ selected on validation data. The default high-precision profile displays only sc
 of 0.70 or greater and targets 0.75 validation precision where the measured curve
 supports it. This score floor is not the same as 70% mAP and can reduce recall.
 Passing `--conf` explicitly overrides all calibrated thresholds.
+
+Strict 90%-precision-mode webcam after running `01D`:
+
+```powershell
+python -m road_detection.realtime_detect `
+  --backend yolo `
+  --weights outputs\yolo_one_minute\bdd100k_yolo_selected.pt `
+  --config outputs\yolo_one_minute\deployment_config.json `
+  --threshold-profile high_precision_90 `
+  --source 0 `
+  --device 0
+```
 
 Faster R-CNN webcam:
 

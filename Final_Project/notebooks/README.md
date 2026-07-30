@@ -11,6 +11,9 @@ predictions, and failure cases remain visible with each experiment.
   with measured batch sizes, broader training data, refinement-set RAM caching, fast
   epoch validation, full finalist validation/test evaluation, and 0.70+
   high-precision live thresholds.
+- `01D_YOLO_One_Minute_Epoch_High_Precision.ipynb`: measured sub-minute
+  micro-epochs for the RTX 3050, full no-regression model selection, and a strict
+  90%-precision deployment profile. This means operating precision, not 90% F1 or mAP.
 - `02_Faster_RCNN_BDD100K_Training.ipynb`: MobileNet or ResNet50 Faster R-CNN with
   COCO-head transfer, proper AP metrics, threshold tuning, and a speed benchmark.
 
@@ -18,3 +21,7 @@ Run `pip install -e .`, launch `jupyter lab` from the project root, choose a `RU
 near the top, and run all cells. For the current laptop run, open `01C`, leave
 `RUN_MODE = "fast_overnight"`, and run all cells. It automatically starts from the
 newest prior accuracy checkpoint without modifying either older notebook.
+
+When the hard requirement is one minute or less per training epoch, open `01D` and run
+all cells. Its measured first epoch took 46.9 seconds including startup; the one-time
+full validation and test evaluation after training take longer.
