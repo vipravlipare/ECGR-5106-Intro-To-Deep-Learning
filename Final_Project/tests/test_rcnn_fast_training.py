@@ -64,6 +64,41 @@ def test_rare_class_sampler_is_reproducible_and_rotates(tmp_path: Path):
     assert len(set(first)) == len(first)
 
 
+def test_sampler_boosts_small_objects_and_dataset_can_preload(tmp_path: Path):
+    image_dir = tmp_path / "images" / "train"
+    label_dir = tmp_path / "labels" / "train"
+    image_dir.mkdir(parents=True)
+    label_dir.mkdir(parents=True)
+    for index in range(2):
+        Image.new("RGB", (32, 16), color=(index * 20, 0, 0)).save(
+            image_dir / f"{index}.jpg"
+        )
+    (label_dir / "0.txt").write_text(
+        "4 0.5 0.5 0.01 0.01\n4 0.6 0.5 0.01 0.01\n",
+        encoding="utf-8",
+    )
+    (label_dir / "1.txt").write_text(
+        "4 0.5 0.5 0.2 0.2\n",
+        encoding="utf-8",
+    )
+
+    dataset = YoloDetectionDataset(tmp_path, "train")
+    sampler = RareClassBalancedSampler(
+        dataset,
+        num_samples=1,
+        num_classes=6,
+        small_object_boost=1.0,
+    )
+    dataset.cache_samples([0], workers=1)
+    image, target = dataset[0]
+
+    assert sampler.small_object_counts == [2, 0]
+    assert sampler.weights[0] > sampler.weights[1]
+    assert 0 in dataset._image_bytes
+    assert image.shape == (3, 16, 32)
+    assert target["boxes"].shape == (2, 4)
+
+
 def test_threshold_tuning_reuses_matches_and_full_map_is_available():
     predictions = [
         {

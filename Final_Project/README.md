@@ -1,30 +1,50 @@
-# Real-Time Road Object Detection Using YOLO and Faster R-CNN
+# Real-Time BDD100K Road Object Detection
 
-Final project for ECGR 5106 Intro to Deep Learning, expanded from the earlier
-`Assignment_2_Implement_Detection_Networks_RCNN_and_YOLO` traffic-light detector.
+ECGR 5106 final project using YOLO11 and Faster R-CNN to detect cars, buses,
+trucks, pedestrians, traffic lights, and traffic signs. The project expands the
+earlier ECGR 5116 traffic-light assignment to diverse BDD100K road scenes while
+keeping training practical on an NVIDIA RTX 3050 Laptop GPU.
 
-This version follows the new proposal: train and evaluate road-scene object detectors on
-BDD100K for cars, buses, trucks, pedestrians, traffic lights, and traffic signs. It includes
-both YOLO and an optimized Faster R-CNN two-stage detector, matching the structure of the
-previous project.
+## Supported Training Notebooks
 
-## Project Goals
+Only two training notebooks are maintained:
 
-- Convert BDD100K detection annotations into YOLO format.
-- Fine-tune a pretrained YOLO detector with transfer learning, heavy but realistic
-  augmentation, cosine learning-rate scheduling, AdamW, AMP, and multi-scale training.
-- Train a high-resolution MobileNetV3-FPN Faster R-CNN with an accuracy-preserving
-  proposal budget, class-aware sampling, staged transfer learning, and AMP.
-- Evaluate precision, recall, F1, mAP50, and mAP50:95 for both detectors.
-- Run realtime webcam/video detection and benchmark inference FPS.
-- Export YOLO weights to deployment formats such as ONNX, TensorRT, OpenVINO, or TFLite.
+- `notebooks/01_YOLO_BDD100K_Training.ipynb`: recommended realtime detector.
+  YOLO11s at 704 px, small-object-aware sampling, AMP, local data staging,
+  low-learning-rate 768 px refinement, no-regression model selection, full
+  validation/test reporting, and per-class live threshold calibration.
+- `notebooks/02B_Faster_RCNN_Fast_High_Accuracy.ipynb`: accuracy-oriented
+  two-stage comparison. ResNet50-FPN V2, transferred COCO head rows, bounded
+  proposal counts, staged backbone fine-tuning, preloaded micro-epochs, and
+  held-out checkpoint selection.
 
-## Setup
+Each notebook contains a `smoke`, `rtx3050_balanced`, and
+`overnight_accuracy` profile. Run `smoke` once to verify the installation, then
+switch back to `rtx3050_balanced` for the real experiment.
 
-### Use The Existing Project Environment
+## Accuracy Terminology
 
-This project was developed with the virtual environment at `C:\tf214_hw2`. It uses
-64-bit **Python 3.11.9**.
+Object detection does not have one classification-style accuracy value. The
+notebooks report:
+
+- **Precision**: fraction of displayed detections that are correct.
+- **Recall**: fraction of labeled objects found.
+- **F1**: harmonic mean of precision and recall at a selected confidence.
+- **mAP50**: area under the per-class precision/recall curves at IoU 0.50.
+- **mAP50:95**: stricter COCO-style localization score.
+- **Confidence**: model score used to filter a prediction, not accuracy.
+
+The old traffic-light assignment's roughly 90% "accuracy" did not penalize
+false positives and could omit missed images from its denominator. Its
+ResNet50-FPN, high-resolution, balanced-data, and staged-training ideas were
+reused, but its metric was not. Neither notebook claims an 80% or 90% result
+before measuring it. Both protect the best starting checkpoint if fine-tuning
+regresses.
+
+## Existing Virtual Environment
+
+This computer uses `C:\tf214_hw2` with 64-bit **Python 3.11.9**, PyTorch 2.10.0
+with CUDA 12.6, Torchvision 0.25.0, and Ultralytics 8.4.112 or newer.
 
 ```powershell
 cd C:\Users\vipra\OneDrive\Documents\GitHub\ECGR-5106-Intro-To-Deep-Learning\Final_Project
@@ -35,433 +55,242 @@ python -m ipykernel install --user --name tf214_hw2 --display-name "Python (tf21
 jupyter lab
 ```
 
-After activation, `python --version` should print `Python 3.11.9`, and the PowerShell
-prompt will normally begin with `(tf214_hw2)`. The `pip install -e .` command installs
-the project package and dependencies, including JupyterLab. The `ipykernel` command
-registers an absolute venv kernel path; select `Python (tf214_hw2)` in the notebook
-instead of a generic system-Python kernel. Run `deactivate` when finished.
+Select **Python (tf214_hw2)** as the notebook kernel. The notebooks stop before a
+real run if this computer accidentally starts them with CPU-only PyTorch.
 
-If PowerShell prevents activation, the environment can still be used directly:
+Verify CUDA:
+
+```powershell
+C:\tf214_hw2\Scripts\python.exe -c "import torch; print(torch.__version__, torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+```
+
+The expected result includes `True` and `NVIDIA GeForce RTX 3050 Laptop GPU`.
+If PowerShell blocks activation, use the environment directly:
 
 ```powershell
 C:\tf214_hw2\Scripts\python.exe -m pip install -e .
-C:\tf214_hw2\Scripts\python.exe -m jupyter lab
+C:\tf214_hw2\Scripts\jupyter-lab.exe
 ```
 
-The laptop's RTX 3050 requires CUDA-enabled PyTorch wheels. The tested environment
-uses PyTorch 2.10.0 with CUDA 12.6:
+## General Virtual Environment
+
+Python 3.10 or newer is supported. Python 3.11 is recommended.
 
 ```powershell
-C:\tf214_hw2\Scripts\python.exe -m pip install --force-reinstall `
-  torch==2.10.0 torchvision==0.25.0 `
-  --index-url https://download.pytorch.org/whl/cu126
-C:\tf214_hw2\Scripts\python.exe -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
-```
-
-Restart Jupyter after changing PyTorch. The verification command should print `True`
-and `NVIDIA GeForce RTX 3050 Laptop GPU`.
-The improved notebook requires `ultralytics>=8.4.112`; `python -m pip install -e .`
-installs or upgrades it.
-
-### Create A General Project-Local Environment
-
-For another computer or user, create a virtual environment inside the project. The
-project supports Python 3.10 or newer; Python 3.11 is recommended to match the tested
-environment.
-
-```powershell
-cd C:\path\to\ECGR-5106-Intro-To-Deep-Learning\Final_Project
+cd C:\path\to\Final_Project
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python --version
+python -m pip install --upgrade pip
 python -m pip install -e .
+python -m ipykernel install --user --name road-detection --display-name "Python (road-detection)"
 jupyter lab
 ```
 
-Open `notebooks/01_YOLO_BDD100K_Training.ipynb`,
-`notebooks/01B_YOLO_BDD100K_Overnight_Accuracy.ipynb`,
-`notebooks/01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb`,
-`notebooks/01D_YOLO_One_Minute_Epoch_High_Precision.ipynb`,
-`notebooks/01E_YOLO_BDD100K_Two_Minute_High_Accuracy.ipynb`, or
-`notebooks/02_Faster_RCNN_BDD100K_Training.ipynb`. For the current RCNN work, open
-`notebooks/02B_Faster_RCNN_Fast_High_Accuracy.ipynb`. The original YOLO notebook
-preserves the completed CPU baseline, and `01B` preserves the first accuracy run.
-The original executed RCNN notebook is also preserved; `02B` is its faster successor.
+Install a CUDA-enabled PyTorch build appropriate for the other computer before
+running a GPU profile.
 
-## Expected BDD100K Layout
+## Download BDD100K
 
-Download BDD100K images and detection labels, then place or unzip them like this:
+Register and download the **100K Images** and **Detection 2020 Labels** archives
+from the [official BDD100K download site](https://bdd-data.berkeley.edu/). A
+browser error on a guessed direct archive URL does not mean the conversion code
+is broken; the official downloads may require an authenticated browser session.
+
+Extract to a real folder, for example:
 
 ```text
-bdd100k/
-  images/
-    100k/
-      train/
-      val/
-      test/
-  labels/
-    det_20/
+C:\datasets\bdd100k\
+  images\
+    100k\
+      train\
+      val\
+      test\
+  labels\
+    det_20\
       det_train.json
       det_val.json
 ```
 
-The converter also tries older label locations such as
-`labels/bdd100k_labels_images_train.json`, plus the per-image JSON layout
-`labels/train/*.json` and `labels/val/*.json`. Public BDD100K test labels are normally
-withheld, so the converter reproducibly reserves 20% of labeled validation data as a
-local test split.
+The public BDD test labels are withheld. The converter reproducibly reserves
+20% of labeled validation scenes as the local held-out test split.
 
-## Convert BDD100K To YOLO Format
+## Convert The Dataset
 
-Quick smoke-test subset:
+Do not type the literal placeholder `C:\path\to\bdd100k`. Use the folder where
+the archives were actually extracted:
 
 ```powershell
 .\scripts\prepare_bdd100k.ps1 `
-  -BddRoot .\data\bdd100k `
-  -Output .\data\bdd100k_yolo_smoke `
+  -BddRoot C:\datasets\bdd100k `
+  -Output .\data\bdd100k_yolo `
   -MaxImagesPerSplit 500
 ```
 
-Full conversion:
+That command creates a quick conversion for a pipeline check. For the real
+training set, omit `-MaxImagesPerSplit`:
+
+```powershell
+.\scripts\prepare_bdd100k.ps1 `
+  -BddRoot C:\datasets\bdd100k `
+  -Output .\data\bdd100k_yolo
+```
+
+Equivalent Python command:
 
 ```powershell
 python -m road_detection.bdd100k_to_yolo `
-  --bdd-root .\data\bdd100k `
-  --output data\bdd100k_yolo `
+  --bdd-root C:\datasets\bdd100k `
+  --output .\data\bdd100k_yolo `
   --splits train val `
   --copy-mode hardlink `
   --val-test-fraction 0.20 `
   --seed 42
 ```
 
-This creates:
+Converted layout:
 
 ```text
-data/bdd100k_yolo/
+data\bdd100k_yolo\
   data.yaml
   conversion_summary.json
-  index/train.jsonl
-  index/val.jsonl
-  index/test.jsonl
-  images/train
-  images/val
-  images/test
-  labels/train
-  labels/val
-  labels/test
+  index\
+    train.jsonl
+    val.jsonl
+    test.jsonl
+  images\
+    train\
+    val\
+    test\
+  labels\
+    train\
+    val\
+    test\
 ```
 
-The compact index is created during conversion while annotations are already in
-memory. The `01C` notebook uses it to build class-aware samples without reopening
-70,000 individual label files.
+## Fast Local Data Cache
 
-## Notebook Training Profiles
+The repository is inside OneDrive. On this computer a YOLO smoke run spent
+about 12.9 minutes hydrating cloud-synced images, then its next 128-image epoch
+took only 9.8 seconds. The YOLO notebook now copies its compact selected subset
+in parallel to `%LOCALAPPDATA%\bdd100k_road_detection_cache` before training.
+The cache is reused on later runs.
 
-The recommended `01E_YOLO_BDD100K_Two_Minute_High_Accuracy.ipynb` profile:
-
-- Starts explicitly from the strongest `01C` checkpoint and excludes the weaker
-  executed `01D` checkpoint.
-- Trains YOLO11n at 576 pixels with batch 16 and `freeze=10`.
-- Draws 2,200 new class-balanced scenes without replacement every epoch from a
-  12,000-image pool while preserving optimizer and cosine-schedule state.
-- Uses inverse-frequency classification loss weights for the rare bus and truck
-  classes and moderate BDD100K augmentation.
-- Measured 139.0 seconds for the warm-up epoch and 104.7 seconds for the steady epoch
-  with a 200-image validation sample on the RTX 3050. The notebook's 400-image
-  validation sample adds about four seconds.
-- Runs 240 bounded epochs by default, then compares the starting and trained
-  checkpoints on all 8,000 validation images and evaluates the winner on all 2,000
-  held-out test images.
-- Saves balanced and strict 0.80-minimum-confidence deployment profiles. Confidence
-  filtering is reported separately from mAP/F1 and is never described as accuracy.
-
-The measured `01D_YOLO_One_Minute_Epoch_High_Precision.ipynb` profile:
-
-- Automatically starts from the newest BDD100K checkpoint.
-- Uses 300 rare-class-balanced images at 320 pixels, batch 32, and freezes the first
-  16 model modules.
-- Measured 29.9 seconds training, 4.2 seconds epoch validation, and 46.9 seconds total
-  first-epoch wall time on the RTX 3050.
-- Always compares the micro-tuned model with the untouched starting checkpoint on all
-  8,000 validation images before deployment.
-- Provides a strict deployment mode targeting 90% validation precision with a minimum
-  displayed confidence of 0.70.
-
-The current checkpoint measured 90.5% aggregate precision at confidence 0.70 on the
-1,200-image validation sample, but recall was only 7.5%. This is a strict operating
-precision result, not 90% F1, mAP, or overall accuracy. A micro-epoch processes 300
-selected images rather than the full 70,000-image training set. The one-time full
-validation and test evaluation therefore take longer than one minute.
-
-The longer `01C_YOLO_BDD100K_Fast_High_Accuracy.ipynb` provides:
-
-- `fast_smoke`: a one-epoch end-to-end check.
-- `fast_overnight`: the measured RTX 3050 continuation. It automatically starts from
-  the newest prior accuracy checkpoint, retains the 4,000 class-aware scenes and adds
-  4,000 fresh scenes at batch 10/576 pixels, then uses batch 8/640 pixels for
-  full-network refinement.
-- `larger_gpu`: a longer high-resolution run for a larger GPU.
-- `cpu_fallback`: a bounded CPU continuation.
-
-The measured `v2` run took about 56-65 minutes per 4,000-image epoch at batch 6 and
-704 pixels. A local `01C` fit check processed batch 10 at 576 pixels in 3.0 seconds per
-step instead of about 5.2 seconds per step, or roughly 2.9 times more images per second.
-It also replaces full 8,000-image validation during every epoch with a fixed 1,200-image
-validation subset. Finalist selection still uses all 8,000 validation images, and the
-final report still uses all 2,000 held-out test images.
-
-The earlier `01B_YOLO_BDD100K_Overnight_Accuracy.ipynb` provides:
-
-- `gpu_smoke`: one-epoch pipeline validation.
-- `overnight_gpu`: an 11-hour continuation/refinement run for the RTX 3050 that
-  preserves the completed YOLO11n baseline training.
-- `nextgen_gpu`: a fresh YOLO26s experiment with a 34-hour budget on this laptop.
-- `full_accuracy`: a longer YOLO26m run for a larger GPU.
-- `cpu_fallback`: a bounded CPU run that is not expected to match the GPU profile.
-
-The unchanged baseline notebook provides:
-
-- `cpu_quick`: small end-to-end run for the current CPU.
-- `cpu_practical`: larger CPU experiment using more data.
-- `accuracy`: full-data, high-resolution final run; a CUDA GPU is strongly recommended.
-
-The requested 70-80% validation/test range is checked as F1 at IoU 0.50. Object detection
-does not have one classification-style accuracy, so the notebooks also report the
-proposal's precision, recall, mAP50, and mAP50:95. The acceptance tables report whether
-the trained model actually reaches the target rather than claiming it in advance.
-
-For the current continuation, open `01E`, leave `RUN_TAG = "v5_rotating_2min"`, and
-use **Run All Cells**. It automatically starts from:
-
-```text
-runs/notebooks/yolo_accuracy/bdd100k_fast_overnight_v3_fast_main/weights/best.pt
-```
-
-If training is interrupted, keep the same tag and set `RESUME_TRAINING = True`. On a
-fresh clone with no local checkpoint, `01E` falls back to COCO-pretrained
-`yolo11n.pt` and starts transfer learning from it.
-
-For the one-minute workflow, open `01D`, leave `RUN_TAG = "v4_one_minute"`, and use
-**Run All Cells**. The default 60 micro-epochs take approximately 45-60 minutes in
-total, followed by the slower one-time full validation and test evaluation. If
-interrupted, keep the tag and set `RESUME_TRAINING = True`.
-
-## Train YOLO From The Command Line
-
-CPU baseline:
+To keep the cache beside the virtual environment instead:
 
 ```powershell
-python -m road_detection.yolo_train `
-  --data data\bdd100k_yolo\data.yaml `
-  --model yolo11n.pt `
-  --epochs 20 `
-  --imgsz 640 `
-  --batch 4 `
-  --device cpu `
-  --workers 0 `
-  --fraction 0.05 `
-  --freeze 10
+$env:BDD100K_FAST_CACHE = "C:\tf214_hw2\bdd_fast_cache"
+jupyter lab
 ```
 
-Final higher-accuracy run:
+The first staging pass can still take time when OneDrive files are online-only.
+It is a one-time I/O cost shown separately from epoch training. Selecting
+**Always keep on this device** for `data\bdd100k_yolo` also avoids hydration
+delays.
 
-```powershell
-python -m road_detection.yolo_train `
-  --data data\bdd100k_yolo\data.yaml `
-  --model yolo11m.pt `
-  --epochs 120 `
-  --imgsz 960 `
-  --batch -1 `
-  --device 0 `
-  --cache disk `
-  --multi-scale
+## YOLO Training
+
+Open `notebooks/01_YOLO_BDD100K_Training.ipynb`, leave:
+
+```python
+RUN_MODE = "rtx3050_balanced"
+RESUME_TRAINING = True
+RUN_REFINEMENT = True
 ```
 
-If your installed Ultralytics release provides a newer YOLO family, pass it directly, for
-example `--model yolo26m.pt`.
+The default profile uses:
 
-## Validate And Export YOLO
+- COCO-pretrained YOLO11s rather than the lower-capacity YOLO11n baseline.
+- 1,200 fixed class- and small-object-aware training scenes per epoch.
+- 300 fixed validation scenes per epoch.
+- Fixed 704 px shapes, batch 8, AMP, and zero Windows DataLoader workers with
+  RAM-cached images. Fixed shapes avoid the severe first-epoch cuDNN autotuning
+  cost measured with dynamic multi-scale training on this GPU.
+- 60 continuous main epochs and up to 12 low-learning-rate 768 px refinement
+  epochs.
+- Mild road-scene geometry and color augmentation, then closed mosaic.
+- Final selection among main, refinement, and the old retained checkpoint on
+  exactly the same validation scenes.
+- Up to 1,000 final validation and 1,000 local test scenes.
 
-```powershell
-python -m road_detection.yolo_eval_export `
-  --weights runs\yolo\bdd100k_road_objects\weights\best.pt `
-  --data data\bdd100k_yolo\data.yaml `
-  --imgsz 960 `
-  --device 0 `
-  --split test
+The measured 128-image steady smoke epoch was 9.8 seconds after local hydration.
+An earlier direct 704 px benchmark projected the 1,200-image profile near
+90-120 seconds per steady epoch. Actual time depends on power mode and cooling.
+
+## Faster R-CNN Training
+
+Open `notebooks/02B_Faster_RCNN_Fast_High_Accuracy.ipynb` and leave:
+
+```python
+RUN_MODE = "rtx3050_balanced"
+RESUME_TRAINING = True
 ```
 
-Export for fast inference:
+The default profile uses:
 
-```powershell
-python -m road_detection.yolo_eval_export `
-  --weights runs\yolo\bdd100k_road_objects\weights\best.pt `
-  --data data\bdd100k_yolo\data.yaml `
-  --export onnx `
-  --half
-```
+- COCO-pretrained Faster R-CNN ResNet50-FPN V2.
+- Compatible COCO classification and box-regression rows for road classes.
+- A fixed 8,000-scene candidate pool with rare-class and tiny-object weights.
+- 320 unique preloaded scenes per epoch, batch 4, AMP, and bounded proposals.
+- Three head/FPN warm-up epochs, then low-learning-rate ResNet layer 3/4
+  fine-tuning.
+- A protected zero-step baseline and combined F1/mAP checkpoint selection.
+- 150 proxy-validation scenes per epoch and up to 1,000 final validation/test
+  scenes.
 
-For NVIDIA GPUs, use `--export engine --half` after validating the PyTorch model.
-
-## Train Faster R-CNN
-
-Recommended RTX 3050 workflow:
-
-```powershell
-& C:\tf214_hw2\Scripts\Activate.ps1
-jupyter lab notebooks\02B_Faster_RCNN_Fast_High_Accuracy.ipynb
-```
-
-Leave `RUN_MODE = "rtx3050_fast"` and run all cells. This profile retains the
-480/640 MobileNetV3-FPN model, trains on 700 different class-aware samples per epoch,
-uses batch 8 and AMP, and resumes from the last completed epoch. The first CUDA epoch
-has an additional kernel warm-up cost.
-
-The old notebook used Torchvision's default 2,000 training proposals. On this laptop,
-one default training step took 31.9 seconds. The balanced `02B` proposal budget reduced
-the warmed training step to about 0.77 seconds for a batch of eight. On the same 150
-untrained validation images, inference improved from 5.20 to 13.52 images/second while
-mAP50 remained 0.159 to 0.160. Those numbers validate the optimization, not final
-trained accuracy; the notebook measures final F1, mAP50, and mAP50:95 after training.
-
-The following CLI remains available for small CPU experiments:
-
-```powershell
-python -m road_detection.rcnn_train `
-  --dataset data\bdd100k_yolo `
-  --variant mobilenet `
-  --epochs 8 `
-  --batch 1 `
-  --min-size 480 `
-  --max-size 640 `
-  --workers 0 `
-  --device cpu `
-  --max-train-images 1000 `
-  --max-val-images 250 `
-  --max-test-images 250 `
-  --output models\fasterrcnn_bdd100k.pth
-```
-
-Final Faster R-CNN ResNet50 comparison:
-
-```powershell
-python -m road_detection.rcnn_train `
-  --dataset data\bdd100k_yolo `
-  --variant resnet50 `
-  --epochs 24 `
-  --batch 2 `
-  --min-size 800 `
-  --max-size 1024 `
-  --trainable-backbone-layers 5 `
-  --device cuda
-```
-
-The R-CNN initializer reuses compatible COCO prediction-head weights. `02B` tunes a
-balanced confidence threshold on validation data, derives a separate 0.70-or-higher
-live threshold, and applies the held threshold to test data. A 0.80 confidence score
-is not the same thing as 80% accuracy, so the notebook reports both model quality and
-the selected operating point explicitly.
+The untouched transferred ResNet model locally measured `0.518 F1` and
+`0.405 mAP50` on the 150-image proxy before BDD fine-tuning, already far above
+the retained MobileNet result (`0.306 F1`, `0.180 mAP50`). A smoke run completed
+the full training/evaluation/deployment path and reached 83.0% test precision
+at its strict operating threshold; smoke metrics are not final-model claims.
 
 ## Realtime Detection
 
-YOLO webcam:
-
-```powershell
-python YOLO_Live_Capture.py `
-  --backend yolo `
-  --weights runs\yolo\bdd100k_road_objects\weights\best.pt `
-  --source 0 `
-  --conf 0.35 `
-  --device 0
-```
-
-Calibrated YOLO webcam after running the improved notebook:
+After YOLO training:
 
 ```powershell
 python -m road_detection.realtime_detect `
   --backend yolo `
-  --weights outputs\yolo_accuracy_fast\bdd100k_yolo_fast_best.pt `
-  --config outputs\yolo_accuracy_fast\deployment_config.json `
-  --threshold-profile high_precision `
+  --weights outputs\yolo_final\bdd100k_yolo11s_best.pt `
+  --config outputs\yolo_final\deployment_config.json `
+  --threshold-profile high_precision_80 `
   --source 0 `
   --device 0
 ```
 
-The deployment JSON contains `balanced` and `high_precision` per-class thresholds
-selected on validation data. The default high-precision profile displays only scores
-of 0.70 or greater and targets 0.75 validation precision where the measured curve
-supports it. This score floor is not the same as 70% mAP and can reduce recall.
-Passing `--conf` explicitly overrides all calibrated thresholds.
+Use `--threshold-profile balanced` for better recall. The strict profile uses
+per-class thresholds with a 0.70 confidence floor and targets at least 80%
+validation precision where the data supports it.
 
-Strict 90%-precision-mode webcam after running `01D`:
+After Faster R-CNN training:
 
 ```powershell
 python -m road_detection.realtime_detect `
-  --backend yolo `
-  --weights outputs\yolo_one_minute\bdd100k_yolo_selected.pt `
-  --config outputs\yolo_one_minute\deployment_config.json `
-  --threshold-profile high_precision_90 `
-  --source 0 `
-  --device 0
-```
-
-Faster R-CNN webcam:
-
-```powershell
-python RCNN_Live_Capture.py `
   --backend rcnn `
-  --weights models\fasterrcnn_bdd100k.pth `
+  --weights models\fasterrcnn_bdd100k_resnet50_best.pth `
   --source 0 `
-  --conf 0.45
+  --device cuda
 ```
 
-Video demo:
+YOLO should normally be used for realtime deployment. Faster R-CNN is the
+two-stage accuracy and error-analysis comparison.
+
+## Tests
 
 ```powershell
-python -m road_detection.realtime_detect `
-  --backend yolo `
-  --weights runs\yolo\bdd100k_road_objects\weights\best.pt `
-  --source C:\path\to\driving_clip.mp4 `
-  --save outputs\road_detection_demo.mp4
+C:\tf214_hw2\Scripts\python.exe -m pytest -q
 ```
 
-## Benchmark Speed
+## Technical References
 
-```powershell
-python -m road_detection.benchmark_inference `
-  --weights runs\yolo\bdd100k_road_objects\weights\best.pt `
-  --source data\bdd100k_yolo\images\val `
-  --imgsz 960 `
-  --device 0
-```
+- [BDD100K paper](https://arxiv.org/abs/1805.04687)
+- [Ultralytics YOLO11 models](https://docs.ultralytics.com/models/yolo11/)
+- [Ultralytics training settings](https://docs.ultralytics.com/modes/train/)
+- [Ultralytics road segmentation discussion](https://github.com/orgs/ultralytics/discussions/20550)
+- [Road semantic segmentation reference](https://github.com/NikolasEnt/Road-Semantic-Segmentation)
+- [Torchvision Faster R-CNN](https://docs.pytorch.org/vision/master/models/faster_rcnn.html)
+- [Feature Pyramid Networks](https://arxiv.org/abs/1612.03144)
+- [PyTorch performance tuning](https://docs.pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
+- [SAHI sliced inference for small objects](https://arxiv.org/abs/2202.06934)
 
-## Accuracy And Speed Strategy
-
-- Use pretrained COCO YOLO weights for transfer learning because the proposal classes
-  overlap heavily with COCO road objects.
-- Continue the strongest adapted YOLO11n checkpoint rather than restarting from COCO.
-- Use 8,000 varied images in the measured batch-10 576-pixel main stage, then unfreeze
-  the full network for a batch-8 640-pixel refinement stage. Final model selection
-  protects against regression.
-- Keep YOLO26s as the longer next-generation experiment; measured local throughput
-  makes it a multi-day run rather than an overnight run.
-- Use class-aware sampling and partial inverse-frequency class weighting for rare buses
-  and trucks.
-- Use mosaic, mild mixup, brightness/color augmentation, and cosine learning-rate decay
-  for BDD100K weather and time-of-day variation.
-- Compare the main and rare-class-refined checkpoints on validation data before choosing
-  the deployment model.
-- Tune confidence on validation only and evaluate once on the local held-out test split.
-- Use AMP, channels-last tensors, refinement-set RAM caching, measured batch sizes, and
-  nondeterministic CUDA kernels for speed.
-- Export the final YOLO model to ONNX or TensorRT for realtime demos.
-- Use Faster R-CNN as a higher-cost two-stage baseline, especially useful for analyzing
-  missed small or overlapping objects.
-
-## Sources
-
-- BDD100K dataset: https://bdd-data.berkeley.edu/
-- BDD100K paper: https://arxiv.org/abs/1805.04687
-- Ultralytics object detection docs: https://docs.ultralytics.com/tasks/detect/
-- Ultralytics training docs: https://docs.ultralytics.com/modes/train/
-- COCO dataset: https://cocodataset.org/
+SAHI-style tiled inference can improve tiny-object recall, but it is not the
+default realtime path because multiple crops increase latency.
