@@ -3,6 +3,11 @@
 Use the `Python (tf214_hw2)` Jupyter kernel and run one smoke profile before the
 real experiment.
 
+The two notebooks in this directory are the current improved working files. An
+unchanged code copy of each is also stored under `improved/`. Previous committed
+iterations and recovered executed results are stored under `recovered/`; do not
+run them over the current experiments.
+
 ## 01_YOLO_BDD100K_Training.ipynb
 
 Recommended realtime workflow:
@@ -31,6 +36,13 @@ Accuracy-oriented two-stage comparison:
 - Final balanced and 80%-precision operating points.
 
 Use `RUN_MODE = "rtx3050_balanced"` for the real run.
+
+## Preservation Policy
+
+Future changes must be made in a newly named notebook first. Fully executed
+notebooks are archived under `recovered/` before any source cells are changed.
+See `recovered/README.md` for which files are exact recoveries and which YOLO
+result notebook was reconstructed from surviving run artifacts.
 
 ## Interpreting Results
 
