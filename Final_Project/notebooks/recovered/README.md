@@ -6,6 +6,12 @@ results again.
 
 ## Fully Executed Results
 
+- `2026-08-01_021051_01_YOLO_BDD100K_Completed_Executed.ipynb` is an exact,
+  byte-for-byte archive of the completed YOLO11s 704/768-pixel run. It contains
+  the main and refinement training outputs, candidate comparison, 1,000-image
+  held-out validation and test evaluation, confidence calibration, and speed
+  benchmark. The final test result is 0.638 precision, 0.492 recall, 0.556 F1,
+  0.528 mAP50, and 0.286 mAP50:95.
 - `02B_Faster_RCNN_Fully_Executed_Recovered.ipynb` is an **exact byte-for-byte
   recovery** of the fully executed RCNN notebook. It contains 12 executed code
   cells, 137 output blocks, training history through epoch 60, plots, final
