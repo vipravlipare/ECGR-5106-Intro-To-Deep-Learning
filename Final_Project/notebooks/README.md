@@ -3,39 +3,45 @@
 Use the `Python (tf214_hw2)` Jupyter kernel and run one smoke profile before the
 real experiment.
 
-The two notebooks in this directory are the current improved working files. An
-unchanged code copy of each is also stored under `improved/`. Previous committed
-iterations and recovered executed results are stored under `recovered/`; do not
-run them over the current experiments.
+The completed YOLO notebook, its larger-data successor, and the current Faster
+R-CNN notebook are kept as separate files. Previous committed iterations and
+recovered executed results are stored under `recovered/`; do not run them over
+the current experiments.
 
 ## 01_YOLO_BDD100K_Training.ipynb
 
-Recommended realtime workflow:
+Completed realtime baseline. Its exact executed copy is archived under
+`recovered/`; keep this notebook unchanged while comparing later experiments.
 
-- YOLO11s at 704 px on the RTX 3050.
-- Fixed rare-class and tiny-object-aware training manifests.
+## 01G_YOLO11s_More_Data_Class_Balanced.ipynb
+
+Recommended larger-data experiment:
+
+- Continues from the completed YOLO11s checkpoint rather than restarting.
+- 4,800-image main and 3,200-image refinement manifests.
+- Guaranteed per-class image minimums plus small-object-aware weighting.
+- Rectangular 576 px bulk training and 704 px refinement for efficient batches.
+- Moderate inverse-frequency classification weights for rare classes.
 - Parallel staging from OneDrive to a reusable local cache.
-- AMP, fixed shapes, realistic augmentation, and closed mosaic.
-- Short 768 px small-object refinement.
-- Main/refinement/old-checkpoint comparison to prevent regression.
+- Main/refinement/completed-checkpoint comparison to prevent regression.
 - Final validation/test metrics and per-class live thresholds.
 
-Use `RUN_MODE = "rtx3050_balanced"` for the real run. `RESUME_TRAINING = True`
+Use `RUN_MODE = "rtx3050_more_data"` for the real run. `RESUME_TRAINING = True`
 continues an interrupted run with the same profile-specific tag.
 
 ## 02B_Faster_RCNN_Fast_High_Accuracy.ipynb
 
-Accuracy-oriented two-stage comparison:
+Accuracy-oriented staged comparison:
 
 - Faster R-CNN ResNet50-FPN V2 with compatible COCO head transfer.
-- Rare-class and tiny-object-aware 320-image epochs.
+- Rare-class and tiny-object-aware 640-image coverage epochs.
 - Parallel per-epoch image preload to avoid OneDrive stalls.
 - Bounded RPN/ROI proposal work, batch 4, and AMP.
-- Head/FPN warm-up followed by low-learning-rate layer 3/4 fine-tuning.
+- Head/FPN warm-up, layer-4 fine-tuning, and a short layer-3/4 finish.
 - Protected COCO-transfer baseline and proper F1/mAP checkpoint selection.
 - Final balanced and 80%-precision operating points.
 
-Use `RUN_MODE = "rtx3050_balanced"` for the real run.
+Use `RUN_MODE = "rtx3050_more_data"` for the real run.
 
 ## Preservation Policy
 

@@ -231,6 +231,91 @@ def weighted_sample(
     return [path for _, path in weighted[:count]]
 
 
+def quota_balanced_sample(
+    records: list[IndexedImage],
+    count: int,
+    class_count: int,
+    minimum_class_images: Sequence[int],
+    exponent: float,
+    seed: int,
+    small_object_boost: float = 0.0,
+) -> list[Path]:
+    """Select a fixed-size set that meets per-class image-coverage minimums."""
+    minimums = [int(value) for value in minimum_class_images]
+    if len(minimums) != class_count:
+        raise ValueError("minimum_class_images must contain one value per class.")
+    if not 0 < count <= len(records):
+        raise ValueError("count must be between 1 and the number of records.")
+    if any(value < 0 or value > count for value in minimums):
+        raise ValueError("Each class minimum must be between 0 and count.")
+
+    by_path = {record.path: record for record in records}
+    if len(by_path) != len(records):
+        raise ValueError("Record paths must be unique.")
+    available = Counter(class_id for record in records for class_id in record.classes)
+    for class_id, minimum in enumerate(minimums):
+        if minimum > available[class_id]:
+            raise ValueError(
+                f"Class {class_id} requests {minimum} images, but only "
+                f"{available[class_id]} are available."
+            )
+
+    selected: dict[Path, IndexedImage] = {}
+    selected_counts: Counter[int] = Counter()
+    class_order = sorted(
+        range(class_count),
+        key=lambda class_id: (available[class_id], -minimums[class_id]),
+    )
+    for class_id in class_order:
+        deficit = max(0, minimums[class_id] - selected_counts[class_id])
+        if deficit == 0:
+            continue
+        if len(selected) + deficit > count:
+            raise ValueError(
+                "The requested class minimums cannot fit in the selected image count."
+            )
+        options = [
+            record
+            for record in records
+            if record.path not in selected and class_id in record.classes
+        ]
+        chosen = weighted_sample(
+            options,
+            deficit,
+            class_count,
+            exponent,
+            seed + 101 * (class_id + 1),
+            small_object_boost,
+        )
+        for path in chosen:
+            record = by_path[path]
+            selected[path] = record
+            selected_counts.update(record.classes)
+
+    remaining_count = count - len(selected)
+    if remaining_count:
+        remaining = [record for record in records if record.path not in selected]
+        chosen = weighted_sample(
+            remaining,
+            remaining_count,
+            class_count,
+            exponent,
+            seed + 1009,
+            small_object_boost,
+        )
+        for path in chosen:
+            record = by_path[path]
+            selected[path] = record
+            selected_counts.update(record.classes)
+
+    for class_id, minimum in enumerate(minimums):
+        if selected_counts[class_id] < minimum:
+            raise RuntimeError(f"Class {class_id} minimum was not satisfied.")
+    paths = list(selected)
+    random.Random(seed + 2027).shuffle(paths)
+    return paths
+
+
 def uniform_sample(images: list[Path], count: int, seed: int) -> list[Path]:
     if count >= len(images):
         return list(images)
@@ -360,6 +445,8 @@ def prepare_fast_data_files(
     seed: int = 42,
     candidate_scan_count: int = 12000,
     scan_workers: int = 12,
+    main_class_minimums: Sequence[int] | None = None,
+    refine_class_minimums: Sequence[int] | None = None,
 ) -> FastDataFiles:
     config, dataset_root, class_names = load_dataset_config(data_yaml)
     train_dir = _resolve_split_path(dataset_root, config["train"])
@@ -408,21 +495,45 @@ def prepare_fast_data_files(
             f"({len(records)} scenes)"
         )
 
-    main_images = weighted_sample(
-        records,
-        main_count,
-        len(class_names),
-        exponent=0.35,
-        seed=seed,
-        small_object_boost=0.60,
+    main_images = (
+        quota_balanced_sample(
+            records,
+            main_count,
+            len(class_names),
+            main_class_minimums,
+            exponent=0.40,
+            seed=seed,
+            small_object_boost=0.70,
+        )
+        if main_class_minimums is not None
+        else weighted_sample(
+            records,
+            main_count,
+            len(class_names),
+            exponent=0.35,
+            seed=seed,
+            small_object_boost=0.60,
+        )
     )
-    refine_images = weighted_sample(
-        records,
-        refine_count,
-        len(class_names),
-        exponent=0.60,
-        seed=seed + 1,
-        small_object_boost=1.00,
+    refine_images = (
+        quota_balanced_sample(
+            records,
+            refine_count,
+            len(class_names),
+            refine_class_minimums,
+            exponent=0.65,
+            seed=seed + 1,
+            small_object_boost=1.10,
+        )
+        if refine_class_minimums is not None
+        else weighted_sample(
+            records,
+            refine_count,
+            len(class_names),
+            exponent=0.60,
+            seed=seed + 1,
+            small_object_boost=1.00,
+        )
     )
 
     validation_images = sorted(validation_dir.glob("*.jpg"))

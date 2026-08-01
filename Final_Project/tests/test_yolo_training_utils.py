@@ -7,6 +7,7 @@ from road_detection.yolo_training_utils import (
     build_candidate_index,
     label_path_for_image,
     load_split_index,
+    quota_balanced_sample,
     stage_images_and_labels,
     weighted_sample,
 )
@@ -38,6 +39,47 @@ def test_small_object_weight_changes_deterministic_sample() -> None:
     )
 
     assert boosted_hits > plain_hits * 2
+
+
+def test_quota_balanced_sample_is_deterministic_and_meets_minimums() -> None:
+    records = []
+    for index in range(5):
+        records.append(IndexedImage(Path(f"all-{index}.jpg"), frozenset({0, 1, 2})))
+    for index in range(5):
+        records.append(IndexedImage(Path(f"one-{index}.jpg"), frozenset({0, 1})))
+        records.append(IndexedImage(Path(f"two-{index}.jpg"), frozenset({0, 2})))
+    for index in range(15):
+        records.append(IndexedImage(Path(f"common-{index}.jpg"), frozenset({0})))
+
+    first = quota_balanced_sample(
+        records,
+        count=15,
+        class_count=3,
+        minimum_class_images=[12, 7, 7],
+        exponent=0.5,
+        seed=17,
+        small_object_boost=0.5,
+    )
+    second = quota_balanced_sample(
+        records,
+        count=15,
+        class_count=3,
+        minimum_class_images=[12, 7, 7],
+        exponent=0.5,
+        seed=17,
+        small_object_boost=0.5,
+    )
+    lookup = {record.path: record for record in records}
+    counts = {
+        class_id: sum(class_id in lookup[path].classes for path in first)
+        for class_id in range(3)
+    }
+
+    assert first == second
+    assert len(first) == len(set(first)) == 15
+    assert counts[0] >= 12
+    assert counts[1] >= 7
+    assert counts[2] >= 7
 
 
 def test_candidate_index_records_class_and_small_object_stats(tmp_path: Path) -> None:
