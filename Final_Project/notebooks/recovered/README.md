@@ -6,6 +6,12 @@ results again.
 
 ## Fully Executed Results
 
+- `2026-08-01_125201_02B_Faster_RCNN_Completed_Executed.ipynb` is an exact,
+  byte-for-byte archive of the completed 32-epoch ResNet50-FPN V2 coverage run.
+  It contains the 20,480-image training history, 1,500-image validation and test
+  evaluation, per-class metrics, confidence operating points, visual predictions,
+  and throughput benchmark. Its balanced test result is 0.735 precision, 0.512
+  recall, 0.603 F1, 0.468 mAP50, and 0.262 mAP50:95.
 - `2026-08-01_021051_01_YOLO_BDD100K_Completed_Executed.ipynb` is an exact,
   byte-for-byte archive of the completed YOLO11s 704/768-pixel run. It contains
   the main and refinement training outputs, candidate comparison, 1,000-image
